@@ -117,7 +117,7 @@ function getLaneItems(clientMode) {
     },
     {
       key: "human",
-      title: "Human Review (No-Code)",
+      title: "Human Review",
       icon: Eye,
       desc: "Flagged assets -> visual QA. Approve/Reject/Comment. Audit trail.",
       badges: [clientMode ? "Brand Portal UI" : "Frontify/Brandfolder", clientMode ? "Review App" : "Gradio UI", "Roles"],
@@ -326,9 +326,6 @@ export default function BrandIntelligenceDiagram() {
           <div className="pointer-events-none absolute -right-12 bottom-10 h-40 w-40 rounded-full bg-[#C8D5E8] opacity-50 blur-[90px]" />
           <div className="relative grid gap-10 lg:grid-cols-[1.15fr_0.85fr]">
             <div className="space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#E8D4C4] bg-[#FFF8F2] px-3 py-1 text-xs uppercase tracking-[0.25em] text-[#B5754D]">
-                Platform overview
-              </div>
               <div className="space-y-3">
                 <h1 className="text-3xl font-semibold tracking-tight text-[#2D3142] sm:text-4xl">
                   BrandStudios.ai Intelligence Control Plane
@@ -405,7 +402,7 @@ export default function BrandIntelligenceDiagram() {
 
         {/* DNA + Infrastructure */}
         <div className="space-y-6">
-          <SectionHeading eyebrow="Operating profile" title="Tenant DNA + shared fabric" description="Every brand lives in its own namespace with dedicated memory, typography, palettes, and oversight controls layered on common infrastructure." />
+          <SectionHeading eyebrow="" title="Tenant DNA + shared fabric" description="Every brand lives in its own namespace with dedicated memory, typography, palettes, and oversight controls layered on common infrastructure." />
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <div className="rounded-2xl border border-[#E8DDD1] bg-white/80 p-5 shadow-[0_20px_40px_rgba(15,23,42,0.04)] backdrop-blur-xl" style={glassFill(0.84)}>
               <div className="flex items-center gap-2 text-sm font-medium text-[#2D3142]">
@@ -461,7 +458,7 @@ export default function BrandIntelligenceDiagram() {
 
         {/* Lanes */}
         <div className="space-y-6">
-          <SectionHeading eyebrow="Pipeline" title="Execution lanes from memory to delivery" description="Shows exactly how intelligence flows: capture brand DNA, orchestrate prompts, generate, score, route to humans, and publish/export." />
+          <SectionHeading eyebrow="" title="Execution lanes from memory to delivery" description="Shows exactly how intelligence flows: capture brand DNA, orchestrate prompts, generate, score, route to humans, and publish/export." />
           <div className="rounded-3xl border border-[#E8DDD1] bg-white/85 p-6 shadow-[0_35px_70px_rgba(17,23,58,0.06)] backdrop-blur-xl" style={glassFill(0.9)}>
             <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
               {laneItems.map((lane, idx) => (
