@@ -32,7 +32,7 @@ const tenants = [
   {
     id: "acme-fashion",
     name: "ACME Fashion",
-    palette: { from: "from-[#D4A574]", via: "via-[#E8C4A8]", to: "to-[#C8A882]" },
+    palette: { from: "from-[#E8A587]", via: "via-[#F4D4C0]", to: "to-[#F0E5D8]" },
     dna: {
       colors: ["#111827", "#F59E0B", "#F43F5E"],
       fonts: ["Inter", "EB Garamond"],
@@ -42,7 +42,7 @@ const tenants = [
   {
     id: "lilydale-beauty",
     name: "Lilydale Beauty",
-    palette: { from: "from-[#E8C4A8]", via: "via-[#D9C4B0]", to: "to-[#C8A882]" },
+    palette: { from: "from-[#F4D4C0]", via: "via-[#F0E5D8]", to: "to-[#FAF3E8]" },
     dna: {
       colors: ["#0F172A", "#A78BFA", "#FDE68A"],
       fonts: ["General Sans", "DM Serif"],
@@ -52,7 +52,7 @@ const tenants = [
   {
     id: "northpeak-outdoors",
     name: "NorthPeak Outdoors",
-    palette: { from: "from-[#D4A574]", via: "via-[#B8C5D6]", to: "to-[#A8BFD4]" },
+    palette: { from: "from-[#E8A587]", via: "via-[#A8C5E0]", to: "to-[#B4D7A8]" },
     dna: {
       colors: ["#0B1220", "#10B981", "#06B6D4"],
       fonts: ["Satoshi", "Source Serif"],
@@ -62,14 +62,14 @@ const tenants = [
 ];
 
 const backgroundDots = [
-  { size: 200, color: "#D4B5A0", top: "10%", left: "65%" },
-  { size: 140, color: "#E8C4A8", top: "5%", right: "12%" },
-  { size: 100, color: "#B8C5D6", top: "28%", left: "10%" },
-  { size: 85, color: "#A8BFD4", top: "45%", right: "28%" },
-  { size: 130, color: "#E6B89C", bottom: "15%", left: "5%" },
-  { size: 170, color: "#C8D5E8", bottom: "8%", right: "15%" },
-  { size: 75, color: "#D9C4B0", top: "65%", left: "45%" },
-  { size: 95, color: "#B5D0E8", top: "50%", right: "8%" },
+  { size: 200, color: "#E8A587", top: "10%", left: "65%" },
+  { size: 140, color: "#F4B89C", top: "5%", right: "12%" },
+  { size: 100, color: "#A8C5E0", top: "28%", left: "10%" },
+  { size: 85, color: "#6B9AC4", top: "45%", right: "28%" },
+  { size: 130, color: "#D97943", bottom: "15%", left: "5%" },
+  { size: 170, color: "#8FB8D4", bottom: "8%", right: "15%" },
+  { size: 75, color: "#B4D7A8", top: "65%", left: "45%" },
+  { size: 95, color: "#7DA8C8", top: "50%", right: "8%" },
 ];
 
 function hexToRgba(hex, alpha = 1) {
@@ -137,13 +137,13 @@ const Connector = ({ delay = 0, dashed = false }) => (
     initial={{ opacity: 0, scaleX: 0 }}
     animate={{ opacity: 1, scaleX: 1 }}
     transition={{ delay, type: "spring", stiffness: 90, damping: 18 }}
-    className={`h-[2px] origin-left rounded-full ${dashed ? "bg-gradient-to-r from-[#D4A574] to-[#E8C4A8]" : "bg-[#D4A574]"}`}
+    className={`h-[2px] origin-left rounded-full ${dashed ? "bg-gradient-to-r from-[#D97943] to-[#F4B89C]" : "bg-[#D97943]"}`}
   />
 );
 
 function Pill({ label }) {
   return (
-    <span className="px-2.5 py-1 text-[10px] rounded-full bg-[#FFF8F2] border border-[#E8D4C4] text-[#B5754D] font-medium tracking-wide inline-block max-w-full break-words leading-tight">
+    <span className="px-2.5 py-1 text-[10px] rounded-full bg-[#FFF5F0] border border-[#F4D4C0] text-[#C8632B] font-medium tracking-wide inline-block max-w-full break-words leading-tight">
       {label}
     </span>
   );
@@ -152,8 +152,8 @@ function Pill({ label }) {
 function HeroStat({ label, value, caption, background }) {
   return (
     <div className="rounded-2xl border border-[#E8DDD1] p-4 shadow-[0_15px_45px_rgba(13,18,53,0.06)] backdrop-blur-lg" style={background}>
-      <p className="text-[10px] uppercase tracking-[0.2em] text-[#B5754D] break-words">{label}</p>
-      <p className="mt-1.5 text-2xl font-semibold text-[#2D3142] break-words">{value}</p>
+      <p className="text-[10px] uppercase tracking-[0.2em] text-[#C8632B] break-words">{label}</p>
+      <p className="mt-1.5 text-2xl font-semibold text-[#1a2b4d] break-words">{value}</p>
       <p className="mt-1.5 text-xs text-[#6B7280] leading-snug break-words">{caption}</p>
     </div>
   );
@@ -162,9 +162,9 @@ function HeroStat({ label, value, caption, background }) {
 function SectionHeading({ eyebrow, title, description }) {
   return (
     <div className="space-y-3">
-      <p className="text-[10px] uppercase tracking-[0.35em] text-[#B5754D]">{eyebrow}</p>
+      <p className="text-[10px] uppercase tracking-[0.35em] text-[#C8632B]">{eyebrow}</p>
       <div className="flex flex-col gap-2 lg:flex-row lg:items-start lg:justify-between">
-        <h2 className="text-2xl font-semibold text-[#2D3142] tracking-tight">{title}</h2>
+        <h2 className="text-2xl font-semibold text-[#1a2b4d] tracking-tight">{title}</h2>
         <p className="text-sm text-[#6B7280] lg:max-w-xl leading-relaxed">{description}</p>
       </div>
     </div>
@@ -178,11 +178,11 @@ function LaneCard({ title, icon: Icon, desc, badges, accent, glassStyle }) {
       className="relative w-full h-full rounded-2xl p-5 border border-[#E8DDD1] bg-white/80 shadow-[0_30px_55px_rgba(15,23,42,0.06)] backdrop-blur-xl flex flex-col"
       style={glassStyle}
     >
-      <div className="absolute inset-x-0 -top-[1px] h-[2px] bg-[#D4A574]" />
+      <div className="absolute inset-x-0 -top-[1px] h-[2px] bg-[#D97943]" />
       <div className="flex flex-col mb-4 gap-3">
         <div className="flex items-center gap-2">
-          <Icon className="h-4 w-4 text-[#D4A574] shrink-0" />
-          <h3 className="text-[#2D3142] font-semibold text-sm tracking-tight leading-snug break-words">{title}</h3>
+          <Icon className="h-4 w-4 text-[#D97943] shrink-0" />
+          <h3 className="text-[#1a2b4d] font-semibold text-sm tracking-tight leading-snug break-words">{title}</h3>
         </div>
         <p className="text-[#6B7280] text-xs leading-relaxed break-words">
           {desc}
@@ -199,13 +199,13 @@ function LaneCard({ title, icon: Icon, desc, badges, accent, glassStyle }) {
 
 function Legend({ clientMode, glassStyle }) {
   const chip = (text) => (
-    <span className="px-2 py-0.5 rounded-md bg-[#FFF8F2] border border-[#E8D4C4] text-[10px] text-[#B5754D] inline-block">
+    <span className="px-2 py-0.5 rounded-md bg-[#FFF5F0] border border-[#F4D4C0] text-[10px] text-[#C8632B] inline-block">
       {text}
     </span>
   );
   return (
     <div className="rounded-2xl border border-[#E8DDD1] bg-white/80 p-5 space-y-4 shadow-[0_20px_40px_rgba(15,23,42,0.04)] backdrop-blur-xl" style={glassStyle}>
-      <div className="flex items-center gap-2 text-[#2D3142] font-semibold text-sm">
+      <div className="flex items-center gap-2 text-[#1a2b4d] font-semibold text-sm">
         <Boxes className="h-4 w-4 shrink-0" /> <span>Legend</span>
       </div>
       <div className="space-y-2.5 text-xs text-[#6B7280]">
@@ -291,8 +291,8 @@ export default function BrandIntelligenceDiagram() {
   );
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-[#F5F1EB] text-[#1f2540]">
-      <div className="pointer-events-none absolute inset-0">
+    <div className="relative min-h-screen w-full overflow-hidden bg-[#F5F1EB] text-[#1a2b4d]">
+      <div className="pointer-events-none fixed inset-0">
         <div
           className="absolute inset-0 opacity-20"
           style={{
@@ -321,15 +321,20 @@ export default function BrandIntelligenceDiagram() {
       <div className="relative mx-auto max-w-7xl space-y-12 px-6 py-10">
         {/* Hero */}
         <div className="relative overflow-hidden rounded-3xl border border-[#E8DDD1] bg-white/85 p-6 md:p-10 shadow-[0_45px_90px_rgba(17,23,58,0.08)] backdrop-blur-2xl" style={glassFill(0.92)}>
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#FFF5EE] via-transparent to-[#E8F0FA]" />
-          <div className="pointer-events-none absolute -left-16 top-8 h-48 w-48 rounded-full bg-[#E8C4A8] opacity-50 blur-[80px]" />
-          <div className="pointer-events-none absolute -right-12 bottom-10 h-40 w-40 rounded-full bg-[#C8D5E8] opacity-50 blur-[90px]" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#FFF5F0] via-transparent to-[#F0F5FA]" />
+          <div className="pointer-events-none absolute -left-16 top-8 h-48 w-48 rounded-full bg-[#F4B89C] opacity-40 blur-[80px]" />
+          <div className="pointer-events-none absolute -right-12 bottom-10 h-40 w-40 rounded-full bg-[#A8C5E0] opacity-40 blur-[90px]" />
           <div className="relative grid gap-10 lg:grid-cols-[1.15fr_0.85fr]">
             <div className="space-y-6">
-              <div className="space-y-3">
-                <h1 className="text-3xl font-semibold tracking-tight text-[#2D3142] sm:text-4xl">
-                  BrandStudios.ai Intelligence Control Plane
-                </h1>
+              <div className="space-y-4">
+                <div className="space-y-1">
+                  <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+                    <span className="text-[#1a2b4d]">BrandStudios</span><span className="text-[#D97943]">.AI</span>
+                  </h1>
+                  <h2 className="text-2xl font-medium tracking-tight text-[#1a2b4d] sm:text-3xl">
+                    Intelligence Control Plane
+                  </h2>
+                </div>
                 <p className="text-sm text-[#6B7280] md:text-base">
                   Multi-tenant creative genome + on-brand generation with evaluators, human-in-loop QA, and headless delivery packaging.
                 </p>
@@ -350,13 +355,13 @@ export default function BrandIntelligenceDiagram() {
             </div>
             <div className="space-y-5 rounded-2xl border border-[#E8DDD1] bg-white/80 p-5 backdrop-blur-xl" style={glassFill(0.88)}>
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-[#B5754D]">Live controls</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-[#C8632B]">Live controls</p>
                 <p className="mt-1 text-sm text-[#6B7280]">Demo how the stack responds when you tune tenants, throughput, and governance.</p>
               </div>
               <div className="space-y-4 text-sm">
                 <div className="space-y-2">
-                  <label className="text-[11px] uppercase tracking-[0.3em] text-[#B5754D]">Tenant workspace</label>
-                  <select value={tenantId} onChange={(e) => setTenantId(e.target.value)} className="w-full rounded-xl border border-[#E8DDD1] bg-[#FFFCF8] px-3 py-2 text-sm text-[#2D3142] focus:border-[#B5754D] focus:outline-none">
+                  <label className="text-[11px] uppercase tracking-[0.3em] text-[#C8632B]">Tenant workspace</label>
+                  <select value={tenantId} onChange={(e) => setTenantId(e.target.value)} className="w-full rounded-xl border border-[#E8DDD1] bg-[#FFFCF8] px-3 py-2 text-sm text-[#1a2b4d] focus:border-[#C8632B] focus:outline-none">
                     {tenants.map((t) => (
                       <option key={t.id} value={t.id}>
                         {t.name}
@@ -365,32 +370,32 @@ export default function BrandIntelligenceDiagram() {
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[11px] uppercase tracking-[0.3em] text-[#B5754D]">Variations per brief</label>
+                  <label className="text-[11px] uppercase tracking-[0.3em] text-[#C8632B]">Variations per brief</label>
                   <div className="flex flex-wrap items-center gap-3">
-                    <input type="number" min={1} max={24} value={variations} onChange={(e) => setVariations(parseInt(e.target.value || "1", 10))} className="w-24 rounded-xl border border-[#E8DDD1] bg-[#FFFCF8] px-3 py-2 text-sm text-[#2D3142] focus:border-[#B5754D] focus:outline-none" />
+                    <input type="number" min={1} max={24} value={variations} onChange={(e) => setVariations(parseInt(e.target.value || "1", 10))} className="w-24 rounded-xl border border-[#E8DDD1] bg-[#FFFCF8] px-3 py-2 text-sm text-[#1a2b4d] focus:border-[#C8632B] focus:outline-none" />
                     <span className="text-xs text-[#6B7280]">Controls creative volume</span>
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[11px] uppercase tracking-[0.3em] text-[#B5754D]">Consistency floor</label>
+                  <label className="text-[11px] uppercase tracking-[0.3em] text-[#C8632B]">Consistency floor</label>
                   <div className="flex items-center justify-between text-xs text-[#6B7280]">
                     <span>Auto-pass requires</span>
-                    <span className="text-[#2D3142] font-semibold">{(threshold * 100).toFixed(0)}%</span>
+                    <span className="text-[#1a2b4d] font-semibold">{(threshold * 100).toFixed(0)}%</span>
                   </div>
-                  <input type="range" min={0.6} max={0.95} step={0.01} value={threshold} onChange={(e) => setThreshold(parseFloat(e.target.value))} className="w-full accent-[#D4A574]" />
+                  <input type="range" min={0.6} max={0.95} step={0.01} value={threshold} onChange={(e) => setThreshold(parseFloat(e.target.value))} className="w-full accent-[#D97943]" />
                 </div>
                 <div className="grid gap-2 sm:grid-cols-2">
-                  <button onClick={() => setHeadless((v) => !v)} className={`flex items-start gap-3 rounded-2xl border px-4 py-3 text-left transition-all ${headless ? "border-[#3d8b51] bg-[#e3f6ea] shadow-[0_0_25px_rgba(61,139,81,0.2)]" : "border-[#E8DDD1] bg-white/80 backdrop-blur-sm hover:border-[#B5754D]"}`}>
+                  <button onClick={() => setHeadless((v) => !v)} className={`flex items-start gap-3 rounded-2xl border px-4 py-3 text-left transition-all ${headless ? "border-[#3d8b51] bg-[#e3f6ea] shadow-[0_0_25px_rgba(61,139,81,0.2)]" : "border-[#E8DDD1] bg-white/80 backdrop-blur-sm hover:border-[#C8632B]"}`}>
                     <ShieldCheck className={`h-5 w-5 shrink-0 mt-0.5 ${headless ? "text-[#2f9a63]" : "text-[#9ca3c0]"}`} />
                     <div className="min-w-0">
-                      <p className="text-sm font-semibold text-[#2D3142] break-words">{headless ? "Headless automation" : "Manual review route"}</p>
+                      <p className="text-sm font-semibold text-[#1a2b4d] break-words">{headless ? "Headless automation" : "Manual review route"}</p>
                       <p className="text-xs text-[#6B7280] mt-1 leading-snug break-words">{headless ? "Auto-packages assets when scores clear." : "Requires human approval for every asset."}</p>
                     </div>
                   </button>
-                  <button onClick={() => setClientMode((v) => !v)} className={`flex items-start gap-3 rounded-2xl border px-4 py-3 text-left transition-all ${clientMode ? "border-[#D4A574] bg-[#FFF8F0] shadow-[0_0_25px_rgba(212,165,116,0.2)]" : "border-[#E8DDD1] bg-white/80 backdrop-blur-sm hover:border-[#B5754D]"}`}>
-                    <Eye className={`h-5 w-5 shrink-0 mt-0.5 ${clientMode ? "text-[#D4A574]" : "text-[#9ca3c0]"}`} />
+                  <button onClick={() => setClientMode((v) => !v)} className={`flex items-start gap-3 rounded-2xl border px-4 py-3 text-left transition-all ${clientMode ? "border-[#D97943] bg-[#FFF5F0] shadow-[0_0_25px_rgba(217,121,67,0.2)]" : "border-[#E8DDD1] bg-white/80 backdrop-blur-sm hover:border-[#C8632B]"}`}>
+                    <Eye className={`h-5 w-5 shrink-0 mt-0.5 ${clientMode ? "text-[#D97943]" : "text-[#9ca3c0]"}`} />
                     <div className="min-w-0">
-                      <p className="text-sm font-semibold text-[#2D3142] break-words">{clientMode ? "Client-safe view" : "Internal view"}</p>
+                      <p className="text-sm font-semibold text-[#1a2b4d] break-words">{clientMode ? "Client-safe view" : "Internal view"}</p>
                       <p className="text-xs text-[#6B7280] mt-1 leading-snug break-words">{clientMode ? "Masks vendor & infra names." : "Shows every vendor touchpoint."}</p>
                     </div>
                   </button>
@@ -405,20 +410,20 @@ export default function BrandIntelligenceDiagram() {
           <SectionHeading eyebrow="" title="Tenant DNA + shared fabric" description="Every brand lives in its own namespace with dedicated memory, typography, palettes, and oversight controls layered on common infrastructure." />
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <div className="rounded-2xl border border-[#E8DDD1] bg-white/80 p-5 shadow-[0_20px_40px_rgba(15,23,42,0.04)] backdrop-blur-xl" style={glassFill(0.84)}>
-              <div className="flex items-center gap-2 text-sm font-medium text-[#2D3142]">
-                <CircuitBoard className="h-4 w-4 text-[#D4A574] shrink-0" /> <span className="break-words">{clientMode ? "Client Workspace" : `${tenant.name} • DNA snapshot`}</span>
+              <div className="flex items-center gap-2 text-sm font-medium text-[#1a2b4d]">
+                <CircuitBoard className="h-4 w-4 text-[#D97943] shrink-0" /> <span className="break-words">{clientMode ? "Client Workspace" : `${tenant.name} • DNA snapshot`}</span>
               </div>
               <div className="mt-4 space-y-4 text-sm text-[#6B7280]">
                 <div className="flex flex-col gap-1.5">
-                  <span className="text-[10px] uppercase tracking-[0.3em] text-[#B5754D]">{clientMode ? "Style" : "Tone"}</span>
+                  <span className="text-[10px] uppercase tracking-[0.3em] text-[#C8632B]">{clientMode ? "Style" : "Tone"}</span>
                   <span className="leading-relaxed break-words">{tenant.dna.tone}</span>
                 </div>
                 <div className="flex flex-col gap-1.5">
-                  <span className="text-[10px] uppercase tracking-[0.3em] text-[#B5754D]">{clientMode ? "Typography" : "Fonts"}</span>
+                  <span className="text-[10px] uppercase tracking-[0.3em] text-[#C8632B]">{clientMode ? "Typography" : "Fonts"}</span>
                   <span className="break-words leading-relaxed">{tenant.dna.fonts.join(", ")}</span>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <span className="text-[10px] uppercase tracking-[0.3em] text-[#B5754D]">Colors</span>
+                  <span className="text-[10px] uppercase tracking-[0.3em] text-[#C8632B]">Colors</span>
                   <div className="flex items-center gap-2 flex-wrap">
                     {tenant.dna.colors.map((c) => (
                       <span key={c} className="h-5 w-8 rounded-md border border-[#E8DDD1] shrink-0" style={{ background: c }} title={c} />
@@ -429,27 +434,27 @@ export default function BrandIntelligenceDiagram() {
             </div>
             <Legend clientMode={clientMode} glassStyle={glassFill(0.82)} />
             <div className="rounded-2xl border border-[#E8DDD1] bg-white/80 p-5 shadow-[0_20px_40px_rgba(15,23,42,0.04)] backdrop-blur-xl" style={glassFill(0.84)}>
-              <div className="flex items-center gap-2 text-sm font-medium text-[#2D3142]">
+              <div className="flex items-center gap-2 text-sm font-medium text-[#1a2b4d]">
                 <Server className="h-4 w-4 shrink-0" /> <span>Shared Infrastructure</span>
               </div>
               <div className="mt-4 grid grid-cols-1 gap-2 text-xs text-[#6B7280] sm:grid-cols-2">
                 <div className="flex items-start gap-2 rounded-xl border border-[#E8DDD1] bg-[#FFFCF8] px-3 py-2">
-                  <Database className="h-4 w-4 text-[#D4A574] shrink-0 mt-0.5" /> <span className="break-words leading-relaxed">{clientMode ? "Auth + Metadata DB" : "Supabase (Auth + Meta)"}</span>
+                  <Database className="h-4 w-4 text-[#D97943] shrink-0 mt-0.5" /> <span className="break-words leading-relaxed">{clientMode ? "Auth + Metadata DB" : "Supabase (Auth + Meta)"}</span>
                 </div>
                 <div className="flex items-start gap-2 rounded-xl border border-[#E8DDD1] bg-[#FFFCF8] px-3 py-2">
-                  <Database className="h-4 w-4 text-[#D4A574] shrink-0 mt-0.5" /> <span className="break-words leading-relaxed">{clientMode ? "Vector DB" : "Pinecone (Vectors)"}</span>
+                  <Database className="h-4 w-4 text-[#D97943] shrink-0 mt-0.5" /> <span className="break-words leading-relaxed">{clientMode ? "Vector DB" : "Pinecone (Vectors)"}</span>
                 </div>
                 <div className="flex items-start gap-2 rounded-xl border border-[#E8DDD1] bg-[#FFFCF8] px-3 py-2">
-                  <Workflow className="h-4 w-4 text-[#D4A574] shrink-0 mt-0.5" /> <span className="break-words leading-relaxed">{clientMode ? "Visual Orchestration" : "Flowise (Orchestration)"}</span>
+                  <Workflow className="h-4 w-4 text-[#D97943] shrink-0 mt-0.5" /> <span className="break-words leading-relaxed">{clientMode ? "Visual Orchestration" : "Flowise (Orchestration)"}</span>
                 </div>
                 <div className="flex items-start gap-2 rounded-xl border border-[#E8DDD1] bg-[#FFFCF8] px-3 py-2">
-                  <Share2 className="h-4 w-4 text-[#D4A574] shrink-0 mt-0.5" /> <span className="break-words leading-relaxed">BrandStudios.ai (Dashboard/Export)</span>
+                  <Share2 className="h-4 w-4 text-[#D97943] shrink-0 mt-0.5" /> <span className="break-words leading-relaxed">BrandStudios.ai (Dashboard/Export)</span>
                 </div>
                 <div className="flex items-start gap-2 rounded-xl border border-[#E8DDD1] bg-[#FFFCF8] px-3 py-2">
-                  <Sparkles className="h-4 w-4 text-[#D4A574] shrink-0 mt-0.5" /> <span className="break-words leading-relaxed">{clientMode ? "Image Gen Engines" : "Scenario/Replicate (Gen)"}</span>
+                  <Sparkles className="h-4 w-4 text-[#D97943] shrink-0 mt-0.5" /> <span className="break-words leading-relaxed">{clientMode ? "Image Gen Engines" : "Scenario/Replicate (Gen)"}</span>
                 </div>
                 <div className="flex items-start gap-2 rounded-xl border border-[#E8DDD1] bg-[#FFFCF8] px-3 py-2">
-                  <Settings2 className="h-4 w-4 text-[#D4A574] shrink-0 mt-0.5" /> <span className="break-words leading-relaxed">Vercel (API + Cron)</span>
+                  <Settings2 className="h-4 w-4 text-[#D97943] shrink-0 mt-0.5" /> <span className="break-words leading-relaxed">Vercel (API + Cron)</span>
                 </div>
               </div>
             </div>
@@ -468,8 +473,8 @@ export default function BrandIntelligenceDiagram() {
                     <div className="hidden xl:block mt-4">
                       <Connector delay={0.05 * idx} />
                       <div className="mt-1 flex items-center justify-between text-[10px] text-[#8B8B8B]">
-                        <span className="flex items-center gap-1"><GitCommit className="h-3 w-3 text-[#D4A574]" /> <span>step {idx + 1}</span></span>
-                        <span className="flex items-center gap-1"><GitCompare className="h-3 w-3 text-[#D4A574]" /> <span>pass &gt;= {threshold.toFixed(2)}</span></span>
+                        <span className="flex items-center gap-1"><GitCommit className="h-3 w-3 text-[#D97943]" /> <span>step {idx + 1}</span></span>
+                        <span className="flex items-center gap-1"><GitCompare className="h-3 w-3 text-[#D97943]" /> <span>pass &gt;= {threshold.toFixed(2)}</span></span>
                       </div>
                     </div>
                   )}
@@ -478,24 +483,24 @@ export default function BrandIntelligenceDiagram() {
             </div>
             <div className="mt-6 grid gap-3 text-sm text-[#6B7280] md:grid-cols-3">
               <div className="flex items-start gap-3 rounded-2xl border border-[#E8DDD1] bg-[#FFFCF8] p-4">
-                <Repeat className="h-5 w-5 text-[#D4A574] shrink-0 mt-0.5" />
+                <Repeat className="h-5 w-5 text-[#D97943] shrink-0 mt-0.5" />
                 <div className="min-w-0">
-                  <p className="text-[10px] uppercase tracking-[0.25em] text-[#B5754D]">Volume</p>
-                  <p className="text-sm text-[#2D3142] mt-1 break-words">{variations} variations / brief</p>
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-[#C8632B]">Volume</p>
+                  <p className="text-sm text-[#1a2b4d] mt-1 break-words">{variations} variations / brief</p>
                 </div>
               </div>
               <div className="flex items-start gap-3 rounded-2xl border border-[#E8DDD1] bg-[#FFFCF8] p-4">
-                {headless ? (<CheckCircle2 className="h-5 w-5 text-[#2f9a63] shrink-0 mt-0.5" />) : (<XCircle className="h-5 w-5 text-[#B5754D] shrink-0 mt-0.5" />)}
+                {headless ? (<CheckCircle2 className="h-5 w-5 text-[#2f9a63] shrink-0 mt-0.5" />) : (<XCircle className="h-5 w-5 text-[#C8632B] shrink-0 mt-0.5" />)}
                 <div className="min-w-0">
-                  <p className="text-[10px] uppercase tracking-[0.25em] text-[#B5754D]">Headless</p>
-                  <p className="text-sm text-[#2D3142] mt-1 break-words">{headless ? "Auto-package enabled (meets guardrails)" : "Manual QA required"}</p>
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-[#C8632B]">Headless</p>
+                  <p className="text-sm text-[#1a2b4d] mt-1 break-words">{headless ? "Auto-package enabled (meets guardrails)" : "Manual QA required"}</p>
                 </div>
               </div>
               <div className="flex items-start gap-3 rounded-2xl border border-[#E8DDD1] bg-[#FFFCF8] p-4">
-                <SlidersHorizontal className="h-5 w-5 text-[#D4A574] shrink-0 mt-0.5" />
+                <SlidersHorizontal className="h-5 w-5 text-[#D97943] shrink-0 mt-0.5" />
                 <div className="min-w-0">
-                  <p className="text-[10px] uppercase tracking-[0.25em] text-[#B5754D]">Thresholds</p>
-                  <p className="text-sm text-[#2D3142] mt-1 break-words">Per-tenant scoring tuned</p>
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-[#C8632B]">Thresholds</p>
+                  <p className="text-sm text-[#1a2b4d] mt-1 break-words">Per-tenant scoring tuned</p>
                 </div>
               </div>
             </div>
