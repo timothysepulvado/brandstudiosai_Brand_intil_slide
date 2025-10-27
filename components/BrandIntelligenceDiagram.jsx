@@ -175,7 +175,7 @@ function LaneCard({ title, icon: Icon, desc, badges, accent, glassStyle }) {
   return (
     <motion.div
       whileHover={{ y: -2 }}
-      className="relative w-full h-full rounded-2xl p-5 border border-[#E8DDD1] bg-white/80 shadow-[0_30px_55px_rgba(15,23,42,0.06)] backdrop-blur-xl flex flex-col"
+      className="relative w-full h-full rounded-2xl p-5 border border-[#E8DDD1] bg-white/60 shadow-[0_30px_55px_rgba(15,23,42,0.06)] backdrop-blur-xl flex flex-col"
       style={glassStyle}
     >
       <div className="absolute inset-x-0 -top-[1px] h-[2px] bg-[#D97943]" />
@@ -204,7 +204,7 @@ function Legend({ clientMode, glassStyle }) {
     </span>
   );
   return (
-    <div className="rounded-2xl border border-[#E8DDD1] bg-white/80 p-5 space-y-4 shadow-[0_20px_40px_rgba(15,23,42,0.04)] backdrop-blur-xl" style={glassStyle}>
+    <div className="rounded-2xl border border-[#E8DDD1] bg-white/60 p-5 space-y-4 shadow-[0_20px_40px_rgba(15,23,42,0.04)] backdrop-blur-xl" style={glassStyle}>
       <div className="flex items-center gap-2 text-[#1a2b4d] font-semibold text-sm">
         <Boxes className="h-4 w-4 shrink-0" /> <span>Legend</span>
       </div>
@@ -267,7 +267,7 @@ export default function BrandIntelligenceDiagram() {
   const tintSecondary = tenant.dna.colors[2] || "#f6c7a2";
   const glassFill = useMemo(
     () => (opacity = 0.88) => ({
-      background: `linear-gradient(135deg, ${hexToRgba(tintPrimary, 0.22)}, ${hexToRgba(tintSecondary, 0.12)}, rgba(255,255,255,${opacity}))`,
+      background: `linear-gradient(135deg, ${hexToRgba(tintPrimary, 0.08)}, ${hexToRgba(tintSecondary, 0.05)}, rgba(255,255,255,${opacity}))`,
       borderColor: "rgba(255,255,255,0.55)",
     }),
     [tintPrimary, tintSecondary]
@@ -320,10 +320,10 @@ export default function BrandIntelligenceDiagram() {
       </div>
       <div className="relative mx-auto max-w-7xl space-y-12 px-6 py-10">
         {/* Hero */}
-        <div className="relative overflow-hidden rounded-3xl border border-[#E8DDD1] bg-white/85 p-6 md:p-10 shadow-[0_45px_90px_rgba(17,23,58,0.08)] backdrop-blur-2xl" style={glassFill(0.92)}>
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#FFF5F0] via-transparent to-[#F0F5FA]" />
-          <div className="pointer-events-none absolute -left-16 top-8 h-48 w-48 rounded-full bg-[#F4B89C] opacity-40 blur-[80px]" />
-          <div className="pointer-events-none absolute -right-12 bottom-10 h-40 w-40 rounded-full bg-[#A8C5E0] opacity-40 blur-[90px]" />
+        <div className="relative overflow-hidden rounded-3xl border border-[#E8DDD1] bg-white/60 p-6 md:p-10 shadow-[0_45px_90px_rgba(17,23,58,0.08)] backdrop-blur-2xl" style={glassFill(0.68)}>
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#FFF5F0]/20 via-transparent to-[#F0F5FA]/20" />
+          <div className="pointer-events-none absolute -left-16 top-8 h-48 w-48 rounded-full bg-[#F4B89C] opacity-20 blur-[80px]" />
+          <div className="pointer-events-none absolute -right-12 bottom-10 h-40 w-40 rounded-full bg-[#A8C5E0] opacity-20 blur-[90px]" />
           <div className="relative grid gap-10 lg:grid-cols-[1.15fr_0.85fr]">
             <div className="space-y-6">
               <div className="space-y-4">
@@ -349,11 +349,11 @@ export default function BrandIntelligenceDiagram() {
               </ul>
               <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
                 {systemStats.map((stat) => (
-                  <HeroStat key={stat.label} background={glassFill(0.86)} {...stat} />
+                  <HeroStat key={stat.label} background={glassFill(0.60)} {...stat} />
                 ))}
               </div>
             </div>
-            <div className="space-y-5 rounded-2xl border border-[#E8DDD1] bg-white/80 p-5 backdrop-blur-xl" style={glassFill(0.88)}>
+            <div className="space-y-5 rounded-2xl border border-[#E8DDD1] bg-white/60 p-5 backdrop-blur-xl" style={glassFill(0.72)}>
               <div>
                 <p className="text-xs uppercase tracking-[0.3em] text-[#C8632B]">Live controls</p>
                 <p className="mt-1 text-sm text-[#6B7280]">Demo how the stack responds when you tune tenants, throughput, and governance.</p>
@@ -385,14 +385,14 @@ export default function BrandIntelligenceDiagram() {
                   <input type="range" min={0.6} max={0.95} step={0.01} value={threshold} onChange={(e) => setThreshold(parseFloat(e.target.value))} className="w-full accent-[#D97943]" />
                 </div>
                 <div className="grid gap-2 sm:grid-cols-2">
-                  <button onClick={() => setHeadless((v) => !v)} className={`flex items-start gap-3 rounded-2xl border px-4 py-3 text-left transition-all ${headless ? "border-[#3d8b51] bg-[#e3f6ea] shadow-[0_0_25px_rgba(61,139,81,0.2)]" : "border-[#E8DDD1] bg-white/80 backdrop-blur-sm hover:border-[#C8632B]"}`}>
+                  <button onClick={() => setHeadless((v) => !v)} className={`flex items-start gap-3 rounded-2xl border px-4 py-3 text-left transition-all ${headless ? "border-[#3d8b51] bg-[#e3f6ea] shadow-[0_0_25px_rgba(61,139,81,0.2)]" : "border-[#E8DDD1] bg-white/60 backdrop-blur-sm hover:border-[#C8632B]"}`}>
                     <ShieldCheck className={`h-5 w-5 shrink-0 mt-0.5 ${headless ? "text-[#2f9a63]" : "text-[#9ca3c0]"}`} />
                     <div className="min-w-0">
                       <p className="text-sm font-semibold text-[#1a2b4d] break-words">{headless ? "Headless automation" : "Manual review route"}</p>
                       <p className="text-xs text-[#6B7280] mt-1 leading-snug break-words">{headless ? "Auto-packages assets when scores clear." : "Requires human approval for every asset."}</p>
                     </div>
                   </button>
-                  <button onClick={() => setClientMode((v) => !v)} className={`flex items-start gap-3 rounded-2xl border px-4 py-3 text-left transition-all ${clientMode ? "border-[#D97943] bg-[#FFF5F0] shadow-[0_0_25px_rgba(217,121,67,0.2)]" : "border-[#E8DDD1] bg-white/80 backdrop-blur-sm hover:border-[#C8632B]"}`}>
+                  <button onClick={() => setClientMode((v) => !v)} className={`flex items-start gap-3 rounded-2xl border px-4 py-3 text-left transition-all ${clientMode ? "border-[#D97943] bg-[#FFF5F0] shadow-[0_0_25px_rgba(217,121,67,0.2)]" : "border-[#E8DDD1] bg-white/60 backdrop-blur-sm hover:border-[#C8632B]"}`}>
                     <Eye className={`h-5 w-5 shrink-0 mt-0.5 ${clientMode ? "text-[#D97943]" : "text-[#9ca3c0]"}`} />
                     <div className="min-w-0">
                       <p className="text-sm font-semibold text-[#1a2b4d] break-words">{clientMode ? "Client-safe view" : "Internal view"}</p>
@@ -409,7 +409,7 @@ export default function BrandIntelligenceDiagram() {
         <div className="space-y-6">
           <SectionHeading eyebrow="" title="Tenant DNA + shared fabric" description="Every brand lives in its own namespace with dedicated memory, typography, palettes, and oversight controls layered on common infrastructure." />
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <div className="rounded-2xl border border-[#E8DDD1] bg-white/80 p-5 shadow-[0_20px_40px_rgba(15,23,42,0.04)] backdrop-blur-xl" style={glassFill(0.84)}>
+            <div className="rounded-2xl border border-[#E8DDD1] bg-white/60 p-5 shadow-[0_20px_40px_rgba(15,23,42,0.04)] backdrop-blur-xl" style={glassFill(0.68)}>
               <div className="flex items-center gap-2 text-sm font-medium text-[#1a2b4d]">
                 <CircuitBoard className="h-4 w-4 text-[#D97943] shrink-0" /> <span className="break-words">{clientMode ? "Client Workspace" : `${tenant.name} • DNA snapshot`}</span>
               </div>
@@ -432,8 +432,8 @@ export default function BrandIntelligenceDiagram() {
                 </div>
               </div>
             </div>
-            <Legend clientMode={clientMode} glassStyle={glassFill(0.82)} />
-            <div className="rounded-2xl border border-[#E8DDD1] bg-white/80 p-5 shadow-[0_20px_40px_rgba(15,23,42,0.04)] backdrop-blur-xl" style={glassFill(0.84)}>
+            <Legend clientMode={clientMode} glassStyle={glassFill(0.66)} />
+            <div className="rounded-2xl border border-[#E8DDD1] bg-white/60 p-5 shadow-[0_20px_40px_rgba(15,23,42,0.04)] backdrop-blur-xl" style={glassFill(0.68)}>
               <div className="flex items-center gap-2 text-sm font-medium text-[#1a2b4d]">
                 <Server className="h-4 w-4 shrink-0" /> <span>Shared Infrastructure</span>
               </div>
@@ -464,11 +464,11 @@ export default function BrandIntelligenceDiagram() {
         {/* Lanes */}
         <div className="space-y-6">
           <SectionHeading eyebrow="" title="Execution lanes from memory to delivery" description="Shows exactly how intelligence flows: capture brand DNA, orchestrate prompts, generate, score, route to humans, and publish/export." />
-          <div className="rounded-3xl border border-[#E8DDD1] bg-white/85 p-6 shadow-[0_35px_70px_rgba(17,23,58,0.06)] backdrop-blur-xl" style={glassFill(0.9)}>
+          <div className="rounded-3xl border border-[#E8DDD1] bg-white/65 p-6 shadow-[0_35px_70px_rgba(17,23,58,0.06)] backdrop-blur-xl" style={glassFill(0.75)}>
             <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
               {laneItems.map((lane, idx) => (
                 <div key={lane.key} className="flex flex-col h-full">
-                  <LaneCard title={lane.title} icon={lane.icon} desc={lane.desc} badges={lane.badges} accent={accent} glassStyle={glassFill(0.82)} />
+                  <LaneCard title={lane.title} icon={lane.icon} desc={lane.desc} badges={lane.badges} accent={accent} glassStyle={glassFill(0.66)} />
                   {idx < laneItems.length - 1 && (
                     <div className="hidden xl:block mt-4">
                       <Connector delay={0.05 * idx} />
