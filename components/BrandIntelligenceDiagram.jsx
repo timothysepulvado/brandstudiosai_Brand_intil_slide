@@ -89,45 +89,45 @@ function getLaneItems(clientMode) {
   return [
     {
       key: "memory",
-      title: "Brand Memory (Per-Tenant)",
+      title: "Brand Memory (Per-Client)",
       icon: Database,
       desc: "Logos, palettes, fonts, models, products, copy tone. Embeddings + metadata.",
-      badges: [clientMode ? "Auth + Metadata DB" : "Supabase (meta)", clientMode ? "Vector DB" : "Pinecone (vectors)", "Namespaces"],
+      badges: ["Metadata DB", "Vector DB", "Isolated Namespaces"],
     },
     {
       key: "orchestrator",
       title: "RAG + Orchestrator",
       icon: Workflow,
-      desc: "Retrieve tenant DNA, assemble prompts/templates. Visual flow control.",
-      badges: [clientMode ? "Visual Orchestration" : "Flowise", "Prompt libs", "Policies"],
+      desc: "Retrieve client DNA, assemble prompts/templates. Visual flow control.",
+      badges: ["Visual Orchestration", "Prompt Libraries", "Brand Policies"],
     },
     {
       key: "generator",
       title: "Generative Engine",
       icon: Wand2,
       desc: "On-brand images with same model & clothing. Pose/scene variations.",
-      badges: [clientMode ? "Fine-tuned Model" : "Scenario LoRA", clientMode ? "Image Gen Engine" : "Replicate SDXL", clientMode ? "Image API" : "OpenAI Images"],
+      badges: ["Fine-tuned Model", "Image Gen Engine", "Video Gen Engine"],
     },
     {
       key: "evaluator",
       title: "Evaluator / Linter",
       icon: Gauge,
       desc: "Embed outputs, compare to baselines, compute brand-consistency score.",
-      badges: [clientMode ? "Vision Embeddings" : "CLIP/ViT", "Cosine distance", "Thresholds"],
+      badges: ["Vision Embeddings", "Cosine Distance", "Thresholds"],
     },
     {
       key: "human",
       title: "Human Review",
       icon: Eye,
       desc: "Flagged assets -> visual QA. Approve/Reject/Comment. Audit trail.",
-      badges: [clientMode ? "Brand Portal UI" : "Frontify/Brandfolder", clientMode ? "Review App" : "Gradio UI", "Roles"],
+      badges: ["Brand Portal UI", "Review Workflow", "Access Roles"],
     },
     {
       key: "publish",
       title: "Export & Delivery",
       icon: Share2,
       desc: "Auto-approve above threshold or require review. Package for export (ZIP/PNG/JSON).",
-      badges: ["BrandStudios.ai Dashboard", "Export", "Headless"],
+      badges: ["BrandStudios.ai Platform", "Export Tools", "Automation"],
     },
   ];
 }
@@ -218,16 +218,16 @@ function Legend({ clientMode, glassStyle }) {
           <span className="leading-relaxed break-words">Retrieval-augmented prompts from Brand Memory</span>
         </div>
         <div className="flex items-start gap-2">
-          <span className="shrink-0">{chip(clientMode ? "Vision Embeddings" : "LoRA")}</span>
-          <span className="leading-relaxed break-words">{clientMode ? "Image/vision representation used for similarity" : "Lightweight per-brand adapters for consistency"}</span>
+          <span className="shrink-0">{chip("LoRA")}</span>
+          <span className="leading-relaxed break-words">Lightweight per-brand adapters for consistency</span>
         </div>
         <div className="flex items-start gap-2">
           <span className="shrink-0">{chip("Score")}</span>
           <span className="leading-relaxed break-words">Cosine similarity to baselines (identity, clothing, palette)</span>
         </div>
         <div className="flex items-start gap-2">
-          <span className="shrink-0">{chip("Headless")}</span>
-          <span className="leading-relaxed break-words">Auto-approve/package if score &gt;= threshold</span>
+          <span className="shrink-0">{chip("Intelligent Automation")}</span>
+          <span className="leading-relaxed break-words">Auto-package with mandatory HITL final approval</span>
         </div>
       </div>
     </div>
@@ -277,17 +277,18 @@ export default function BrandIntelligenceDiagram() {
       { label: "Active tenants", value: `${tenants.length}`, caption: "Pilots live across fashion & beauty" },
       { label: "Variations / brief", value: `${variations}`, caption: "Avg. creative volume per request" },
       { label: "Consistency floor", value: `${(threshold * 100).toFixed(0)}%`, caption: "Cosine similarity target" },
-      { label: "View mode", value: clientMode ? "Client-safe" : "Internal", caption: clientMode ? "Vendor names masked" : "Partners visible" },
+      { label: "View mode", value: clientMode ? "Client View" : "Tenant View", caption: clientMode ? "Technical details" : "Agency overview" },
     ],
     [variations, threshold, clientMode]
   );
   const differentiators = useMemo(
     () => [
-      "Multi-tenant Brand Memory isolates embeddings, prompts, and creative rules per customer.",
-      `Evaluator enforces ≥ ${(threshold * 100).toFixed(0)}% similarity before assets can ship.`,
-      headless ? "Headless automation packages assets automatically when confidence hits the floor." : "Headless automation stays off until confidence targets are met.",
+      "Agencies manage multiple brand clients, each with fully isolated memory, rules, and creative DNA.",
+      `Evaluator enforces ≥ ${(threshold * 100).toFixed(0)}% consistency floor before assets can advance.`,
+      "Configurable HITL review gates at any pipeline stage, with mandatory human approval before final delivery.",
+      "Human review reinforcement learning trains each brand independently—insights never cross-pollinate between clients.",
     ],
-    [threshold, headless]
+    [threshold]
   );
 
   return (
@@ -388,15 +389,15 @@ export default function BrandIntelligenceDiagram() {
                   <button onClick={() => setHeadless((v) => !v)} className={`flex items-start gap-3 rounded-2xl border px-4 py-3 text-left transition-all ${headless ? "border-[#3d8b51] bg-[#e3f6ea] shadow-[0_0_25px_rgba(61,139,81,0.2)]" : "border-[#E8DDD1] bg-white/60 backdrop-blur-sm hover:border-[#C8632B]"}`}>
                     <ShieldCheck className={`h-5 w-5 shrink-0 mt-0.5 ${headless ? "text-[#2f9a63]" : "text-[#9ca3c0]"}`} />
                     <div className="min-w-0">
-                      <p className="text-sm font-semibold text-[#1a2b4d] break-words">{headless ? "Headless automation" : "Manual review route"}</p>
-                      <p className="text-xs text-[#6B7280] mt-1 leading-snug break-words">{headless ? "Auto-packages assets when scores clear." : "Requires human approval for every asset."}</p>
+                      <p className="text-sm font-semibold text-[#1a2b4d] break-words">{headless ? "Intelligent automation" : "Manual review route"}</p>
+                      <p className="text-xs text-[#6B7280] mt-1 leading-snug break-words">{headless ? "Auto-packages assets with HITL final approval." : "Requires human approval at every stage."}</p>
                     </div>
                   </button>
                   <button onClick={() => setClientMode((v) => !v)} className={`flex items-start gap-3 rounded-2xl border px-4 py-3 text-left transition-all ${clientMode ? "border-[#D97943] bg-[#FFF5F0] shadow-[0_0_25px_rgba(217,121,67,0.2)]" : "border-[#E8DDD1] bg-white/60 backdrop-blur-sm hover:border-[#C8632B]"}`}>
                     <Eye className={`h-5 w-5 shrink-0 mt-0.5 ${clientMode ? "text-[#D97943]" : "text-[#9ca3c0]"}`} />
                     <div className="min-w-0">
-                      <p className="text-sm font-semibold text-[#1a2b4d] break-words">{clientMode ? "Client-safe view" : "Internal view"}</p>
-                      <p className="text-xs text-[#6B7280] mt-1 leading-snug break-words">{clientMode ? "Masks vendor & infra names." : "Shows every vendor touchpoint."}</p>
+                      <p className="text-sm font-semibold text-[#1a2b4d] break-words">{clientMode ? "Client View" : "Tenant View"}</p>
+                      <p className="text-xs text-[#6B7280] mt-1 leading-snug break-words">{clientMode ? "Technical infrastructure details." : "Agency management overview."}</p>
                     </div>
                   </button>
                 </div>
@@ -439,22 +440,22 @@ export default function BrandIntelligenceDiagram() {
               </div>
               <div className="mt-4 grid grid-cols-1 gap-2 text-xs text-[#6B7280] sm:grid-cols-2">
                 <div className="flex items-start gap-2 rounded-xl border border-[#E8DDD1] bg-[#FFFCF8] px-3 py-2">
-                  <Database className="h-4 w-4 text-[#D97943] shrink-0 mt-0.5" /> <span className="break-words leading-relaxed">{clientMode ? "Auth + Metadata DB" : "Supabase (Auth + Meta)"}</span>
+                  <Database className="h-4 w-4 text-[#D97943] shrink-0 mt-0.5" /> <span className="break-words leading-relaxed">Auth + Metadata DB</span>
                 </div>
                 <div className="flex items-start gap-2 rounded-xl border border-[#E8DDD1] bg-[#FFFCF8] px-3 py-2">
-                  <Database className="h-4 w-4 text-[#D97943] shrink-0 mt-0.5" /> <span className="break-words leading-relaxed">{clientMode ? "Vector DB" : "Pinecone (Vectors)"}</span>
+                  <Database className="h-4 w-4 text-[#D97943] shrink-0 mt-0.5" /> <span className="break-words leading-relaxed">Vector DB</span>
                 </div>
                 <div className="flex items-start gap-2 rounded-xl border border-[#E8DDD1] bg-[#FFFCF8] px-3 py-2">
-                  <Workflow className="h-4 w-4 text-[#D97943] shrink-0 mt-0.5" /> <span className="break-words leading-relaxed">{clientMode ? "Visual Orchestration" : "Flowise (Orchestration)"}</span>
+                  <Workflow className="h-4 w-4 text-[#D97943] shrink-0 mt-0.5" /> <span className="break-words leading-relaxed">Visual Orchestration</span>
                 </div>
                 <div className="flex items-start gap-2 rounded-xl border border-[#E8DDD1] bg-[#FFFCF8] px-3 py-2">
-                  <Share2 className="h-4 w-4 text-[#D97943] shrink-0 mt-0.5" /> <span className="break-words leading-relaxed">BrandStudios.ai (Dashboard/Export)</span>
+                  <Share2 className="h-4 w-4 text-[#D97943] shrink-0 mt-0.5" /> <span className="break-words leading-relaxed">BrandStudios.ai Platform</span>
                 </div>
                 <div className="flex items-start gap-2 rounded-xl border border-[#E8DDD1] bg-[#FFFCF8] px-3 py-2">
-                  <Sparkles className="h-4 w-4 text-[#D97943] shrink-0 mt-0.5" /> <span className="break-words leading-relaxed">{clientMode ? "Image Gen Engines" : "Scenario/Replicate (Gen)"}</span>
+                  <Sparkles className="h-4 w-4 text-[#D97943] shrink-0 mt-0.5" /> <span className="break-words leading-relaxed">Image/Video Gen Engines</span>
                 </div>
                 <div className="flex items-start gap-2 rounded-xl border border-[#E8DDD1] bg-[#FFFCF8] px-3 py-2">
-                  <Settings2 className="h-4 w-4 text-[#D97943] shrink-0 mt-0.5" /> <span className="break-words leading-relaxed">Vercel (API + Cron)</span>
+                  <Settings2 className="h-4 w-4 text-[#D97943] shrink-0 mt-0.5" /> <span className="break-words leading-relaxed">API + Workflow Automation</span>
                 </div>
               </div>
             </div>
@@ -492,8 +493,8 @@ export default function BrandIntelligenceDiagram() {
               <div className="flex items-start gap-3 rounded-2xl border border-[#E8DDD1] bg-[#FFFCF8] p-4">
                 {headless ? (<CheckCircle2 className="h-5 w-5 text-[#2f9a63] shrink-0 mt-0.5" />) : (<XCircle className="h-5 w-5 text-[#C8632B] shrink-0 mt-0.5" />)}
                 <div className="min-w-0">
-                  <p className="text-[10px] uppercase tracking-[0.25em] text-[#C8632B]">Headless</p>
-                  <p className="text-sm text-[#1a2b4d] mt-1 break-words">{headless ? "Auto-package enabled (meets guardrails)" : "Manual QA required"}</p>
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-[#C8632B]">Intelligent Automation</p>
+                  <p className="text-sm text-[#1a2b4d] mt-1 break-words">{headless ? "Auto-package with HITL final approval" : "Manual review at all stages"}</p>
                 </div>
               </div>
               <div className="flex items-start gap-3 rounded-2xl border border-[#E8DDD1] bg-[#FFFCF8] p-4">
