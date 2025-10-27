@@ -267,7 +267,7 @@ export default function BrandIntelligenceDiagram() {
   const tintSecondary = tenant.dna.colors[2] || "#f6c7a2";
   const glassFill = useMemo(
     () => (opacity = 0.88) => ({
-      background: `linear-gradient(135deg, ${hexToRgba(tintPrimary, 0.08)}, ${hexToRgba(tintSecondary, 0.05)}, rgba(255,255,255,${opacity}))`,
+      background: `linear-gradient(135deg, ${hexToRgba(tintPrimary, 0.15)}, ${hexToRgba(tintSecondary, 0.09)}, rgba(255,255,255,${opacity}))`,
       borderColor: "rgba(255,255,255,0.55)",
     }),
     [tintPrimary, tintSecondary]
@@ -349,7 +349,7 @@ export default function BrandIntelligenceDiagram() {
               </ul>
               <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
                 {systemStats.map((stat) => (
-                  <HeroStat key={stat.label} background={glassFill(0.60)} {...stat} />
+                  <HeroStat key={stat.label} background={{ background: 'rgba(255,255,255,0.60)', borderColor: 'rgba(255,255,255,0.55)' }} {...stat} />
                 ))}
               </div>
             </div>
