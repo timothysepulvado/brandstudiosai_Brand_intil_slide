@@ -325,7 +325,7 @@ export default function BrandIntelligenceDiagram() {
 
   useEffect(() => { runTests(); }, []);
 
-  // Reset to agency overview when switching from Client View to Agency View
+  // Reset to agency overview when switching from Brand View to Agency View
   useEffect(() => {
     if (!clientMode) {
       setTenantOverview(true);
@@ -349,7 +349,7 @@ export default function BrandIntelligenceDiagram() {
       { label: "Active tenants", value: `${tenants.length}`, caption: "Pilots live across fashion & beauty" },
       { label: "Variations / brief", value: `${variations}`, caption: "Avg. creative volume per request" },
       { label: "Consistency floor", value: `${(threshold * 100).toFixed(0)}%`, caption: "Cosine similarity target" },
-      { label: "View mode", value: clientMode ? "Client View" : "Agency View", caption: clientMode ? "Technical details" : "Agency overview" },
+      { label: "View mode", value: clientMode ? "Brand View" : "Agency View", caption: clientMode ? "Technical details" : "Agency overview" },
     ],
     [variations, threshold, clientMode]
   );
@@ -432,7 +432,7 @@ export default function BrandIntelligenceDiagram() {
                 <p className="mt-1 text-sm text-[#6B7280]">Demo how the stack responds when you tune tenants, throughput, and governance.</p>
               </div>
               <div className="space-y-4 text-sm">
-                {/* Only show dropdown in Client View or when viewing individual client in Agency View */}
+                {/* Only show dropdown in Brand View or when viewing individual client in Agency View */}
                 {(clientMode || !tenantOverview) && (
                   <div className="space-y-2">
                     <label className="text-[11px] uppercase tracking-[0.3em] text-[#C8632B]">Tenant workspace</label>
@@ -471,7 +471,7 @@ export default function BrandIntelligenceDiagram() {
                   <button onClick={() => setClientMode((v) => !v)} className={`flex items-start gap-3 rounded-2xl border px-4 py-3 text-left transition-all ${clientMode ? "border-[#D97943] bg-[#FFF5F0] shadow-[0_0_25px_rgba(217,121,67,0.2)]" : "border-[#E8DDD1] bg-white/60 backdrop-blur-sm hover:border-[#C8632B]"}`}>
                     <Eye className={`h-5 w-5 shrink-0 mt-0.5 ${clientMode ? "text-[#D97943]" : "text-[#9ca3c0]"}`} />
                     <div className="min-w-0">
-                      <p className="text-sm font-semibold text-[#1a2b4d] break-words">{clientMode ? "Client View" : "Agency View"}</p>
+                      <p className="text-sm font-semibold text-[#1a2b4d] break-words">{clientMode ? "Brand View" : "Agency View"}</p>
                       <p className="text-xs text-[#6B7280] mt-1 leading-snug break-words">{clientMode ? "Technical infrastructure details." : "Agency management overview."}</p>
                     </div>
                   </button>
@@ -496,10 +496,10 @@ export default function BrandIntelligenceDiagram() {
                 glassStyle={glassFill(0.68)}
               />
             ) : (
-              // Individual Client Mode or Client View: Show DNA card
+              // Individual Client Mode or Brand View: Show DNA card
               <div className="rounded-2xl border border-[#E8DDD1] bg-white/60 p-5 shadow-[0_20px_40px_rgba(15,23,42,0.04)] backdrop-blur-xl" style={glassFill(0.68)}>
                 <div className="flex items-center gap-2 text-sm font-medium text-[#1a2b4d]">
-                  <CircuitBoard className="h-4 w-4 text-[#D97943] shrink-0" /> <span className="break-words">{clientMode ? "Client Workspace" : `${tenant.name} • DNA snapshot`}</span>
+                  <CircuitBoard className="h-4 w-4 text-[#D97943] shrink-0" /> <span className="break-words">{clientMode ? "Brand Workspace" : `${tenant.name} • DNA snapshot`}</span>
                 </div>
                 {/* Back button for Agency View individual client mode */}
                 {!clientMode && !tenantOverview && (
@@ -571,12 +571,12 @@ export default function BrandIntelligenceDiagram() {
         <div className="space-y-6">
           <SectionHeading eyebrow="" title="Execution lanes from memory to delivery" description="Shows exactly how intelligence flows: capture brand DNA, orchestrate prompts, generate, score, route to humans, and publish/export." />
           <div className="rounded-3xl border border-[#E8DDD1] bg-white/65 p-6 shadow-[0_35px_70px_rgba(17,23,58,0.06)] backdrop-blur-xl" style={glassFill(0.75)}>
-            <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+            <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-2 lg:grid-cols-6">
               {laneItems.map((lane, idx) => (
                 <div key={lane.key} className="flex flex-col h-full">
                   <LaneCard title={lane.title} icon={lane.icon} desc={lane.desc} badges={lane.badges} accent={accent} glassStyle={glassFill(0.66)} />
                   {idx < laneItems.length - 1 && (
-                    <div className="hidden xl:block mt-4">
+                    <div className="hidden lg:block mt-4">
                       <Connector delay={0.05 * idx} />
                       <div className="mt-1 flex items-center justify-between text-[10px] text-[#8B8B8B]">
                         <span className="flex items-center gap-1"><GitCommit className="h-3 w-3 text-[#D97943]" /> <span>step {idx + 1}</span></span>
