@@ -19,6 +19,7 @@ import {
   Sparkles,
   GitCommit,
   GitCompare,
+  ArrowLeft,
 } from "lucide-react";
 
 // -----------------------------------------------------------------------------
@@ -32,6 +33,8 @@ const tenants = [
   {
     id: "acme-fashion",
     name: "ACME Fashion",
+    campaign: "Extend fall photoshoot with lifestyle imagery",
+    status: "running",
     palette: { from: "from-[#E8A587]", via: "via-[#F4D4C0]", to: "to-[#F0E5D8]" },
     dna: {
       colors: ["#111827", "#F59E0B", "#F43F5E"],
@@ -42,6 +45,8 @@ const tenants = [
   {
     id: "lilydale-beauty",
     name: "Lilydale Beauty",
+    campaign: "Add video assets for product launch campaign",
+    status: "review",
     palette: { from: "from-[#F4D4C0]", via: "via-[#F0E5D8]", to: "to-[#FAF3E8]" },
     dna: {
       colors: ["#0F172A", "#A78BFA", "#FDE68A"],
@@ -52,6 +57,8 @@ const tenants = [
   {
     id: "northpeak-outdoors",
     name: "NorthPeak Outdoors",
+    campaign: "Lint existing photoshoot for brand consistency drift",
+    status: "attention",
     palette: { from: "from-[#E8A587]", via: "via-[#A8C5E0]", to: "to-[#B4D7A8]" },
     dna: {
       colors: ["#0B1220", "#10B981", "#06B6D4"],
@@ -234,6 +241,63 @@ function Legend({ clientMode, glassStyle }) {
   );
 }
 
+function ClientSelectionButtons({ onSelectClient, glassStyle }) {
+  const getStatusConfig = (status) => {
+    switch (status) {
+      case "running":
+        return { text: "Running", color: "text-[#2f9a63]", bg: "bg-[#e3f6ea]" };
+      case "review":
+        return { text: "Review", color: "text-[#D97943]", bg: "bg-[#FFF5F0]" };
+      case "attention":
+        return { text: "Attention", color: "text-[#C8632B]", bg: "bg-[#FFF0E6]" };
+      default:
+        return { text: "Idle", color: "text-[#6B7280]", bg: "bg-[#F5F1EB]" };
+    }
+  };
+
+  return (
+    <div className="rounded-2xl border border-[#E8DDD1] bg-white/60 p-5 shadow-[0_20px_40px_rgba(15,23,42,0.04)] backdrop-blur-xl" style={glassStyle}>
+      <div className="flex items-center gap-2 text-sm font-medium text-[#1a2b4d] mb-3">
+        <CircuitBoard className="h-4 w-4 text-[#D97943] shrink-0" />
+        <span>Agency Overview</span>
+      </div>
+
+      {/* Agency Overview Stats */}
+      <div className="mb-4 pb-4 border-b border-[#E8DDD1] space-y-3">
+        <div className="flex items-center justify-between text-xs">
+          <span className="text-[#6B7280]">Active Clients</span>
+          <span className="font-semibold text-[#1a2b4d]">{tenants.length}</span>
+        </div>
+        <div className="flex items-center justify-between text-xs">
+          <span className="text-[#6B7280]">Running Campaigns</span>
+          <span className="font-semibold text-[#1a2b4d]">{tenants.length}</span>
+        </div>
+      </div>
+
+      {/* Client Selection */}
+      <div className="space-y-2">
+        {tenants.map((t) => {
+          const statusConfig = getStatusConfig(t.status);
+          return (
+            <motion.button
+              key={t.id}
+              onClick={() => onSelectClient(t.id)}
+              whileHover={{ scale: 1.005 }}
+              whileTap={{ scale: 0.995 }}
+              className="group w-full flex items-center justify-between px-3 py-2 rounded-lg bg-white/60 text-[#1a2b4d] font-medium text-xs transition-all hover:bg-white/80 hover:text-[#D97943] hover:shadow-[0_2px_8px_rgba(217,121,67,0.15)] hover:backdrop-blur-xl border border-[#E8DDD1] hover:border-[#D97943]"
+            >
+              <span>{t.name}</span>
+              <span className={`px-2 py-0.5 rounded text-[9px] font-medium ${statusConfig.bg} ${statusConfig.color} transition-opacity group-hover:opacity-80`}>
+                {statusConfig.text}
+              </span>
+            </motion.button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 // -----------------------------
 // Minimal runtime tests
 // -----------------------------
@@ -257,8 +321,16 @@ export default function BrandIntelligenceDiagram() {
   const [headless, setHeadless] = useState(true);
   const [threshold, setThreshold] = useState(0.82); // cosine similarity pass threshold
   const [clientMode, setClientMode] = useState(false);
+  const [tenantOverview, setTenantOverview] = useState(true);
 
   useEffect(() => { runTests(); }, []);
+
+  // Reset to agency overview when switching from Client View to Agency View
+  useEffect(() => {
+    if (!clientMode) {
+      setTenantOverview(true);
+    }
+  }, [clientMode]);
 
   const tenant = useMemo(() => tenants.find((t) => t.id === tenantId) || tenants[0], [tenantId]);
   const accent = useMemo(() => `${tenant.palette.from} ${tenant.palette.via} ${tenant.palette.to}`, [tenant]);
@@ -277,7 +349,7 @@ export default function BrandIntelligenceDiagram() {
       { label: "Active tenants", value: `${tenants.length}`, caption: "Pilots live across fashion & beauty" },
       { label: "Variations / brief", value: `${variations}`, caption: "Avg. creative volume per request" },
       { label: "Consistency floor", value: `${(threshold * 100).toFixed(0)}%`, caption: "Cosine similarity target" },
-      { label: "View mode", value: clientMode ? "Client View" : "Tenant View", caption: clientMode ? "Technical details" : "Agency overview" },
+      { label: "View mode", value: clientMode ? "Client View" : "Agency View", caption: clientMode ? "Technical details" : "Agency overview" },
     ],
     [variations, threshold, clientMode]
   );
@@ -360,16 +432,19 @@ export default function BrandIntelligenceDiagram() {
                 <p className="mt-1 text-sm text-[#6B7280]">Demo how the stack responds when you tune tenants, throughput, and governance.</p>
               </div>
               <div className="space-y-4 text-sm">
-                <div className="space-y-2">
-                  <label className="text-[11px] uppercase tracking-[0.3em] text-[#C8632B]">Tenant workspace</label>
-                  <select value={tenantId} onChange={(e) => setTenantId(e.target.value)} className="w-full rounded-xl border border-[#E8DDD1] bg-[#FFFCF8] px-3 py-2 text-sm text-[#1a2b4d] focus:border-[#C8632B] focus:outline-none">
-                    {tenants.map((t) => (
-                      <option key={t.id} value={t.id}>
-                        {t.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                {/* Only show dropdown in Client View or when viewing individual client in Agency View */}
+                {(clientMode || !tenantOverview) && (
+                  <div className="space-y-2">
+                    <label className="text-[11px] uppercase tracking-[0.3em] text-[#C8632B]">Tenant workspace</label>
+                    <select value={tenantId} onChange={(e) => setTenantId(e.target.value)} className="w-full rounded-xl border border-[#E8DDD1] bg-[#FFFCF8] px-3 py-2 text-sm text-[#1a2b4d] focus:border-[#C8632B] focus:outline-none">
+                      {tenants.map((t) => (
+                        <option key={t.id} value={t.id}>
+                          {t.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
                 <div className="space-y-2">
                   <label className="text-[11px] uppercase tracking-[0.3em] text-[#C8632B]">Variations per brief</label>
                   <div className="flex flex-wrap items-center gap-3">
@@ -378,7 +453,7 @@ export default function BrandIntelligenceDiagram() {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[11px] uppercase tracking-[0.3em] text-[#C8632B]">Consistency floor</label>
+                  <label className="text-[11px] uppercase tracking-[0.3em] text-[#C8632B]">Brand Drift™</label>
                   <div className="flex items-center justify-between text-xs text-[#6B7280]">
                     <span>Auto-pass requires</span>
                     <span className="text-[#1a2b4d] font-semibold">{(threshold * 100).toFixed(0)}%</span>
@@ -396,7 +471,7 @@ export default function BrandIntelligenceDiagram() {
                   <button onClick={() => setClientMode((v) => !v)} className={`flex items-start gap-3 rounded-2xl border px-4 py-3 text-left transition-all ${clientMode ? "border-[#D97943] bg-[#FFF5F0] shadow-[0_0_25px_rgba(217,121,67,0.2)]" : "border-[#E8DDD1] bg-white/60 backdrop-blur-sm hover:border-[#C8632B]"}`}>
                     <Eye className={`h-5 w-5 shrink-0 mt-0.5 ${clientMode ? "text-[#D97943]" : "text-[#9ca3c0]"}`} />
                     <div className="min-w-0">
-                      <p className="text-sm font-semibold text-[#1a2b4d] break-words">{clientMode ? "Client View" : "Tenant View"}</p>
+                      <p className="text-sm font-semibold text-[#1a2b4d] break-words">{clientMode ? "Client View" : "Agency View"}</p>
                       <p className="text-xs text-[#6B7280] mt-1 leading-snug break-words">{clientMode ? "Technical infrastructure details." : "Agency management overview."}</p>
                     </div>
                   </button>
@@ -408,31 +483,61 @@ export default function BrandIntelligenceDiagram() {
 
         {/* DNA + Infrastructure */}
         <div className="space-y-6">
-          <SectionHeading eyebrow="" title="Tenant DNA + shared fabric" description="Every brand lives in its own namespace with dedicated memory, typography, palettes, and oversight controls layered on common infrastructure." />
+          <SectionHeading eyebrow="" title="Agency DNA + shared fabric" description="Every brand lives in its own namespace with dedicated memory, typography, palettes, and oversight controls layered on common infrastructure." />
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <div className="rounded-2xl border border-[#E8DDD1] bg-white/60 p-5 shadow-[0_20px_40px_rgba(15,23,42,0.04)] backdrop-blur-xl" style={glassFill(0.68)}>
-              <div className="flex items-center gap-2 text-sm font-medium text-[#1a2b4d]">
-                <CircuitBoard className="h-4 w-4 text-[#D97943] shrink-0" /> <span className="break-words">{clientMode ? "Client Workspace" : `${tenant.name} • DNA snapshot`}</span>
-              </div>
-              <div className="mt-4 space-y-4 text-sm text-[#6B7280]">
-                <div className="flex flex-col gap-1.5">
-                  <span className="text-[10px] uppercase tracking-[0.3em] text-[#C8632B]">{clientMode ? "Style" : "Tone"}</span>
-                  <span className="leading-relaxed break-words">{tenant.dna.tone}</span>
+            {/* DNA Card or Client Selection */}
+            {!clientMode && tenantOverview ? (
+              // Agency Overview Mode: Show client selection buttons
+              <ClientSelectionButtons
+                onSelectClient={(id) => {
+                  setTenantId(id);
+                  setTenantOverview(false);
+                }}
+                glassStyle={glassFill(0.68)}
+              />
+            ) : (
+              // Individual Client Mode or Client View: Show DNA card
+              <div className="rounded-2xl border border-[#E8DDD1] bg-white/60 p-5 shadow-[0_20px_40px_rgba(15,23,42,0.04)] backdrop-blur-xl" style={glassFill(0.68)}>
+                <div className="flex items-center gap-2 text-sm font-medium text-[#1a2b4d]">
+                  <CircuitBoard className="h-4 w-4 text-[#D97943] shrink-0" /> <span className="break-words">{clientMode ? "Client Workspace" : `${tenant.name} • DNA snapshot`}</span>
                 </div>
-                <div className="flex flex-col gap-1.5">
-                  <span className="text-[10px] uppercase tracking-[0.3em] text-[#C8632B]">{clientMode ? "Typography" : "Fonts"}</span>
-                  <span className="break-words leading-relaxed">{tenant.dna.fonts.join(", ")}</span>
-                </div>
-                <div className="flex flex-col gap-2">
-                  <span className="text-[10px] uppercase tracking-[0.3em] text-[#C8632B]">Colors</span>
-                  <div className="flex items-center gap-2 flex-wrap">
-                    {tenant.dna.colors.map((c) => (
-                      <span key={c} className="h-5 w-8 rounded-md border border-[#E8DDD1] shrink-0" style={{ background: c }} title={c} />
-                    ))}
+                {/* Back button for Agency View individual client mode */}
+                {!clientMode && !tenantOverview && (
+                  <button
+                    onClick={() => setTenantOverview(true)}
+                    className="mt-3 flex items-center gap-2 text-xs text-[#D97943] hover:text-[#C8632B] transition-colors"
+                  >
+                    <ArrowLeft className="h-3 w-3" />
+                    <span>Back to Agency Overview</span>
+                  </button>
+                )}
+                {/* Campaign description for Agency View individual client mode */}
+                {!clientMode && !tenantOverview && (
+                  <div className="mt-4 pb-4 border-b border-[#E8DDD1]">
+                    <span className="text-[10px] uppercase tracking-[0.3em] text-[#C8632B]">Current Campaign</span>
+                    <p className="mt-1.5 text-sm text-[#6B7280] leading-relaxed">{tenant.campaign}</p>
+                  </div>
+                )}
+                <div className="mt-4 space-y-4 text-sm text-[#6B7280]">
+                  <div className="flex flex-col gap-1.5">
+                    <span className="text-[10px] uppercase tracking-[0.3em] text-[#C8632B]">{clientMode ? "Style" : "Tone"}</span>
+                    <span className="leading-relaxed break-words">{tenant.dna.tone}</span>
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <span className="text-[10px] uppercase tracking-[0.3em] text-[#C8632B]">{clientMode ? "Typography" : "Fonts"}</span>
+                    <span className="break-words leading-relaxed">{tenant.dna.fonts.join(", ")}</span>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <span className="text-[10px] uppercase tracking-[0.3em] text-[#C8632B]">Colors</span>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      {tenant.dna.colors.map((c) => (
+                        <span key={c} className="h-5 w-8 rounded-md border border-[#E8DDD1] shrink-0" style={{ background: c }} title={c} />
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            )}
             <Legend clientMode={clientMode} glassStyle={glassFill(0.66)} />
             <div className="rounded-2xl border border-[#E8DDD1] bg-white/60 p-5 shadow-[0_20px_40px_rgba(15,23,42,0.04)] backdrop-blur-xl" style={glassFill(0.68)}>
               <div className="flex items-center gap-2 text-sm font-medium text-[#1a2b4d]">
