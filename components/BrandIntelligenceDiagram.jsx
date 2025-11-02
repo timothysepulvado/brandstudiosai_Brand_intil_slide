@@ -31,10 +31,11 @@ import {
 
 const tenants = [
   {
-    id: "acme-fashion",
-    name: "ACME Fashion",
+    id: "bazooka",
+    name: "Bazooka",
     campaign: "Extend fall photoshoot with lifestyle imagery",
     status: "running",
+    url: "https://bazooka-pied.vercel.app",
     palette: { from: "from-[#E8A587]", via: "via-[#F4D4C0]", to: "to-[#F0E5D8]" },
     dna: {
       colors: ["#111827", "#F59E0B", "#F43F5E"],
@@ -43,8 +44,8 @@ const tenants = [
     },
   },
   {
-    id: "lilydale-beauty",
-    name: "Lilydale Beauty",
+    id: "jenni-kayne",
+    name: "Jenni Kayne",
     campaign: "Add video assets for product launch campaign",
     status: "review",
     palette: { from: "from-[#F4D4C0]", via: "via-[#F0E5D8]", to: "to-[#FAF3E8]" },
@@ -55,8 +56,8 @@ const tenants = [
     },
   },
   {
-    id: "northpeak-outdoors",
-    name: "NorthPeak Outdoors",
+    id: "lilydale",
+    name: "Lilydale",
     campaign: "Lint existing photoshoot for brand consistency drift",
     status: "attention",
     palette: { from: "from-[#E8A587]", via: "via-[#A8C5E0]", to: "to-[#B4D7A8]" },
@@ -64,6 +65,18 @@ const tenants = [
       colors: ["#0B1220", "#10B981", "#06B6D4"],
       fonts: ["Satoshi", "Source Serif"],
       tone: "Crisp • Natural • Adventurous",
+    },
+  },
+  {
+    id: "mealpop",
+    name: "Mealpop",
+    campaign: "Develop brand assets for new product line",
+    status: "running",
+    palette: { from: "from-[#F4D4C0]", via: "via-[#F0E5D8]", to: "to-[#FAF3E8]" },
+    dna: {
+      colors: ["#1a2b4d", "#D97943", "#F4B89C"],
+      fonts: ["Inter", "Source Serif"],
+      tone: "Fresh • Approachable • Modern",
     },
   },
 ];
@@ -281,7 +294,12 @@ function ClientSelectionButtons({ onSelectClient, glassStyle }) {
           return (
             <motion.button
               key={t.id}
-              onClick={() => onSelectClient(t.id)}
+              onClick={() => {
+                onSelectClient(t.id);
+                if (t.url) {
+                  window.open(t.url, '_blank', 'noopener,noreferrer');
+                }
+              }}
               whileHover={{ scale: 1.005 }}
               whileTap={{ scale: 0.995 }}
               className="group w-full flex items-center justify-between px-3 py-2 rounded-lg bg-white/60 text-[#1a2b4d] font-medium text-xs transition-all hover:bg-white/80 hover:text-[#D97943] hover:shadow-[0_2px_8px_rgba(217,121,67,0.15)] hover:backdrop-blur-xl border border-[#E8DDD1] hover:border-[#D97943]"
