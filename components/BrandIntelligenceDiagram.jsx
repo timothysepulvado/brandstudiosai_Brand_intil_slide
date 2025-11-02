@@ -356,11 +356,11 @@ export default function BrandIntelligenceDiagram() {
   const differentiators = useMemo(
     () => [
       "Agencies manage multiple brand clients, each with fully isolated memory, rules, and creative DNA.",
-      `Evaluator enforces ≥ ${(threshold * 100).toFixed(0)}% consistency floor before assets can advance.`,
+      "Evaluator enforces ≥ 90% consistency floor (Brand Grade) before asset advances to Human Review",
       "Configurable HITL review gates at any pipeline stage, with mandatory human approval before final delivery.",
       "Human review reinforcement learning trains each brand independently—insights never cross-pollinate between clients.",
     ],
-    [threshold]
+    []
   );
 
   return (
@@ -580,7 +580,7 @@ export default function BrandIntelligenceDiagram() {
                       <Connector delay={0.05 * idx} />
                       <div className="mt-1 flex items-center justify-between text-[10px] text-[#8B8B8B]">
                         <span className="flex items-center gap-1"><GitCommit className="h-3 w-3 text-[#D97943]" /> <span>step {idx + 1}</span></span>
-                        <span className="flex items-center gap-1"><GitCompare className="h-3 w-3 text-[#D97943]" /> <span>pass &gt;= {threshold.toFixed(2)}</span></span>
+                        <span className="flex items-center gap-1"><GitCompare className="h-3 w-3 text-[#D97943]" /> <span>pass ≥ 90%</span></span>
                       </div>
                     </div>
                   )}
