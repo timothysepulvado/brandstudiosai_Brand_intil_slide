@@ -368,7 +368,7 @@ export default function BrandIntelligenceDiagram() {
   );
   const systemStats = useMemo(
     () => [
-      { label: "Active tenants", value: `${tenants.length}`, caption: "Pilots live across fashion & beauty" },
+      { label: "Active Brands", value: `${tenants.length}`, caption: "Pilots live across fashion & beauty" },
       { label: "Variations / brief", value: `${variations}`, caption: "Avg. creative volume per request" },
       { label: "Consistency floor", value: `${(threshold * 100).toFixed(0)}%`, caption: "Cosine similarity target" },
       { label: "View mode", value: clientMode ? "Brand View" : "Agency View", caption: clientMode ? "Technical details" : "Agency overview" },
@@ -379,7 +379,7 @@ export default function BrandIntelligenceDiagram() {
     () => [
       "Agencies manage multiple brand clients, each with fully isolated memory, rules, and creative DNA.",
       "Evaluator enforces ≥ 90% consistency floor (Brand Grade) before asset advances to Human Review",
-      "Configurable HITL review gates at any pipeline stage, with mandatory human approval before final delivery.",
+      "Configurable Human in the Loop (HITL) review gates at any pipeline stage, with mandatory human approval before final delivery.",
       "Human review reinforcement learning trains each brand independently—insights never cross-pollinate between clients.",
     ],
     []
@@ -427,7 +427,7 @@ export default function BrandIntelligenceDiagram() {
                     <span className="text-[#1a2b4d]">BrandStudios</span><span className="text-[#D97943]">.AI</span>
                   </h1>
                   <h2 className="text-2xl font-medium tracking-tight text-[#1a2b4d] sm:text-3xl">
-                    Intelligence Control Plane
+                    Intelligence Control Panel
                   </h2>
                 </div>
                 <p className="text-sm text-[#6B7280] md:text-base">
