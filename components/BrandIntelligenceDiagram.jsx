@@ -26,21 +26,21 @@ import {
 // BrandStudios.ai - Brand Intelligence Engine (Multi-Tenant)
 // -----------------------------------------------------------------------------
 // Responsive layout tuned so all text stays inside cards across breakpoints.
-// Adds client-facing mode (masks vendor names) and lightweight runtime tests.
+// Adds brand-facing mode (masks vendor names) and lightweight runtime tests.
 // -----------------------------------------------------------------------------
 
 const tenants = [
   {
     id: "bazooka",
     name: "Bazooka",
-    campaign: "Extend fall photoshoot with lifestyle imagery",
+    campaign: "Push Pop holiday campaign with festive creative assets",
     status: "running",
     url: "https://bazooka-pied.vercel.app",
     palette: { from: "from-[#E8A587]", via: "via-[#F4D4C0]", to: "to-[#F0E5D8]" },
     dna: {
-      colors: ["#111827", "#F59E0B", "#F43F5E"],
+      colors: ["#E31E24", "#FFFFFF", "#0047AB"],
       fonts: ["Inter", "EB Garamond"],
-      tone: "Bold • Urban • Editorial",
+      tone: "Bold • Playful • Nostalgic",
     },
   },
   {
@@ -118,7 +118,7 @@ function getLaneItems(clientMode) {
       key: "orchestrator",
       title: "RAG + Orchestrator",
       icon: Workflow,
-      desc: "Retrieve client DNA, assemble prompts/templates. Visual flow control.",
+      desc: "Retrieve brand DNA, assemble prompts/templates. Visual flow control.",
       badges: ["Visual Orchestration", "Prompt Libraries", "Brand Policies"],
     },
     {
@@ -324,7 +324,7 @@ function runTests() {
   const asInternal = getLaneItems(false);
   const assertions = [
     { name: "lane count", pass: asClient.length === 6 && asInternal.length === 6 },
-    { name: "client mask - memory badge", pass: asClient[0].badges[0] === "Auth + Metadata DB" },
+    { name: "brand mask - memory badge", pass: asClient[0].badges[0] === "Auth + Metadata DB" },
     { name: "internal vendors visible", pass: asInternal[0].badges[0] === "Supabase (meta)" },
   ];
   const failed = assertions.filter((a) => !a.pass);
@@ -427,7 +427,7 @@ export default function BrandIntelligenceDiagram() {
                   </h2>
                 </div>
                 <p className="text-sm text-[#6B7280] md:text-base">
-                  Multi-tenant creative genome + on-brand generation with evaluators, human-in-loop QA, and headless delivery packaging.
+                  Multi-agency creative genome + on-brand generation with evaluators, human-in-loop QA, and headless delivery packaging.
                 </p>
               </div>
               <ul className="grid gap-3 text-sm text-[#6B7280] sm:grid-cols-2">
@@ -450,7 +450,7 @@ export default function BrandIntelligenceDiagram() {
                 <p className="mt-1 text-sm text-[#6B7280]">Demo how the stack responds when you tune tenants, throughput, and governance.</p>
               </div>
               <div className="space-y-4 text-sm">
-                {/* Only show dropdown in Brand View or when viewing individual client in Agency View */}
+                {/* Only show dropdown in Brand View or when viewing individual brand in Agency View */}
                 {(clientMode || !tenantOverview) && (
                   <div className="space-y-2">
                     <label className="text-[11px] uppercase tracking-[0.3em] text-[#C8632B]">Tenant workspace</label>
@@ -505,7 +505,7 @@ export default function BrandIntelligenceDiagram() {
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {/* DNA Card or Client Selection */}
             {!clientMode && tenantOverview ? (
-              // Agency Overview Mode: Show client selection buttons
+              // Agency Overview Mode: Show brand selection buttons
               <ClientSelectionButtons
                 onSelectClient={(id) => {
                   setTenantId(id);
@@ -519,7 +519,7 @@ export default function BrandIntelligenceDiagram() {
                 <div className="flex items-center gap-2 text-sm font-medium text-[#1a2b4d]">
                   <CircuitBoard className="h-4 w-4 text-[#D97943] shrink-0" /> <span className="break-words">{clientMode ? "Brand Workspace" : `${tenant.name} • DNA snapshot`}</span>
                 </div>
-                {/* Back button for Agency View individual client mode */}
+                {/* Back button for Agency View individual brand mode */}
                 {!clientMode && !tenantOverview && (
                   <button
                     onClick={() => setTenantOverview(true)}
@@ -529,7 +529,7 @@ export default function BrandIntelligenceDiagram() {
                     <span>Back to Agency Overview</span>
                   </button>
                 )}
-                {/* Campaign description for Agency View individual client mode */}
+                {/* Campaign description for Agency View individual brand mode */}
                 {!clientMode && !tenantOverview && (
                   <div className="mt-4 pb-4 border-b border-[#E8DDD1]">
                     <span className="text-[10px] uppercase tracking-[0.3em] text-[#C8632B]">Current Campaign</span>
@@ -624,7 +624,7 @@ export default function BrandIntelligenceDiagram() {
                 <SlidersHorizontal className="h-5 w-5 text-[#D97943] shrink-0 mt-0.5" />
                 <div className="min-w-0">
                   <p className="text-[10px] uppercase tracking-[0.25em] text-[#C8632B]">Thresholds</p>
-                  <p className="text-sm text-[#1a2b4d] mt-1 break-words">Per-tenant scoring tuned</p>
+                  <p className="text-sm text-[#1a2b4d] mt-1 break-words">Per-agency scoring tuned</p>
                 </div>
               </div>
             </div>
