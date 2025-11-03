@@ -73,13 +73,14 @@ const tenants = [
   {
     id: "mealpop",
     name: "Mealpop",
-    campaign: "Develop brand assets for new product line",
+    campaign: "Recipe content creation with photorealistic food imagery and chef videos",
     status: "running",
+    url: "https://mk-2-vr1.vercel.app",
     palette: { from: "from-[#F4D4C0]", via: "via-[#F0E5D8]", to: "to-[#FAF3E8]" },
     dna: {
-      colors: ["#1a2b4d", "#D97943", "#F4B89C"],
+      colors: ["#0A1628", "#00E5E5", "#9D4EDD", "#FFFFFF"],
       fonts: ["Inter", "Source Serif"],
-      tone: "Fresh • Approachable • Modern",
+      tone: "Modern • Tech-Forward • Vibrant",
     },
   },
 ];
