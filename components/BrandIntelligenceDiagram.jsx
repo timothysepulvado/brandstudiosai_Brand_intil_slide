@@ -20,6 +20,7 @@ import {
   GitCommit,
   GitCompare,
   ArrowLeft,
+  ChevronDown,
 } from "lucide-react";
 
 // -----------------------------------------------------------------------------
@@ -342,6 +343,7 @@ export default function BrandIntelligenceDiagram() {
   const [threshold, setThreshold] = useState(0.82); // cosine similarity pass threshold
   const [clientMode, setClientMode] = useState(false);
   const [tenantOverview, setTenantOverview] = useState(true);
+  const [showAdvanced, setShowAdvanced] = useState(false);
 
   useEffect(() => { runTests(); }, []);
 
@@ -479,6 +481,79 @@ export default function BrandIntelligenceDiagram() {
                     <span className="text-[#1a2b4d] font-semibold">{(threshold * 100).toFixed(0)}%</span>
                   </div>
                   <input type="range" min={0.6} max={0.95} step={0.01} value={threshold} onChange={(e) => setThreshold(parseFloat(e.target.value))} className="w-full accent-[#D97943]" />
+
+                  {/* Advanced Settings */}
+                  <button
+                    onClick={() => setShowAdvanced((v) => !v)}
+                    className="mt-3 flex items-center gap-2 text-[9px] uppercase tracking-[0.25em] text-[#6B7280] hover:text-[#D97943] transition-colors"
+                  >
+                    <SlidersHorizontal className="h-3 w-3" />
+                    <span>Advanced Tuning</span>
+                    <ChevronDown className={`h-3 w-3 transition-transform ${showAdvanced ? 'rotate-180' : ''}`} />
+                  </button>
+
+                  {showAdvanced && (
+                    <div className="mt-2 p-3 rounded-lg bg-[#FFFCF8] border border-[#E8DDD1] space-y-2">
+                      <div className="grid grid-cols-2 gap-3">
+                        <div>
+                          <div className="flex items-center justify-between text-[9px] text-[#6B7280] mb-1">
+                            <span>Width</span>
+                            <span className="text-[#1a2b4d] font-medium">1024</span>
+                          </div>
+                          <input type="range" min={512} max={2048} step={64} className="w-full h-1 accent-[#D97943]" />
+                        </div>
+                        <div>
+                          <div className="flex items-center justify-between text-[9px] text-[#6B7280] mb-1">
+                            <span>Height</span>
+                            <span className="text-[#1a2b4d] font-medium">1024</span>
+                          </div>
+                          <input type="range" min={512} max={2048} step={64} className="w-full h-1 accent-[#D97943]" />
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-3">
+                        <div>
+                          <div className="flex items-center justify-between text-[9px] text-[#6B7280] mb-1">
+                            <span>avg_saturation</span>
+                            <span className="text-[#1a2b4d] font-medium">0.5</span>
+                          </div>
+                          <input type="range" min={0} max={1} step={0.05} className="w-full h-1 accent-[#D97943]" />
+                        </div>
+                        <div>
+                          <div className="flex items-center justify-between text-[9px] text-[#6B7280] mb-1">
+                            <span>avg_value</span>
+                            <span className="text-[#1a2b4d] font-medium">0.5</span>
+                          </div>
+                          <input type="range" min={0} max={1} step={0.05} className="w-full h-1 accent-[#D97943]" />
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-3">
+                        <div>
+                          <div className="flex items-center justify-between text-[9px] text-[#6B7280] mb-1">
+                            <span>dominant_neutral_ratio</span>
+                            <span className="text-[#1a2b4d] font-medium">0.3</span>
+                          </div>
+                          <input type="range" min={0} max={1} step={0.05} className="w-full h-1 accent-[#D97943]" />
+                        </div>
+                        <div>
+                          <div className="flex items-center justify-between text-[9px] text-[#6B7280] mb-1">
+                            <span>whitespace_ratio</span>
+                            <span className="text-[#1a2b4d] font-medium">0.2</span>
+                          </div>
+                          <input type="range" min={0} max={1} step={0.05} className="w-full h-1 accent-[#D97943]" />
+                        </div>
+                      </div>
+
+                      <div>
+                        <div className="flex items-center justify-between text-[9px] text-[#6B7280] mb-1">
+                          <span>background_clutter</span>
+                          <span className="text-[#1a2b4d] font-medium">0.1</span>
+                        </div>
+                        <input type="range" min={0} max={1} step={0.05} className="w-full h-1 accent-[#D97943]" />
+                      </div>
+                    </div>
+                  )}
                 </div>
                 <div className="grid gap-2 sm:grid-cols-2">
                   <button onClick={() => setHeadless((v) => !v)} className={`flex items-start gap-3 rounded-2xl border px-4 py-3 text-left transition-all ${headless ? "border-[#3d8b51] bg-[#e3f6ea] shadow-[0_0_25px_rgba(61,139,81,0.2)]" : "border-[#E8DDD1] bg-white/60 backdrop-blur-sm hover:border-[#C8632B]"}`}>
