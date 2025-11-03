@@ -59,7 +59,7 @@ const tenants = [
   {
     id: "lilydale",
     name: "Lilydale",
-    campaign: "Fresh content creation for trusted farm-to-table poultry brand",
+    campaign: "Fresh content creation for trusted farm-to-table brand",
     status: "attention",
     url: "https://lillydal-vis-prasset-vid.vercel.app",
     palette: { from: "from-[#E8A587]", via: "via-[#A8C5E0]", to: "to-[#B4D7A8]" },
