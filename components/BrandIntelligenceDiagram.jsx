@@ -377,7 +377,7 @@ export default function BrandIntelligenceDiagram() {
   );
   const differentiators = useMemo(
     () => [
-      "Agencies manage multiple brand clients, each with fully isolated memory, rules, and creative DNA.",
+      "Agencies manage multiple clients, each with fully isolated memory, rules, and Brand DNA.",
       "Evaluator enforces ≥ 90% consistency floor (Brand Grade) before asset advances to Human Review",
       "Configurable Human in the Loop (HITL) review gates at any pipeline stage, with mandatory human approval before final delivery.",
       "Human review reinforcement learning trains each brand independently—insights never cross-pollinate between clients.",
