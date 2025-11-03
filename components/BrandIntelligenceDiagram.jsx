@@ -340,7 +340,7 @@ export default function BrandIntelligenceDiagram() {
   const [tenantId, setTenantId] = useState(tenants[0].id);
   const [variations, setVariations] = useState(5);
   const [headless, setHeadless] = useState(true);
-  const [threshold, setThreshold] = useState(0.82); // cosine similarity pass threshold
+  const [threshold, setThreshold] = useState(0.95); // cosine similarity pass threshold
   const [clientMode, setClientMode] = useState(false);
   const [tenantOverview, setTenantOverview] = useState(true);
   const [showAdvanced, setShowAdvanced] = useState(false);
