@@ -46,25 +46,27 @@ const tenants = [
   {
     id: "jenni-kayne",
     name: "Jenni Kayne",
-    campaign: "Add video assets for product launch campaign",
+    campaign: "Timeless storytelling with natural materials and California minimalism",
     status: "review",
+    url: "https://jkbrandstudiosai-vis.vercel.app",
     palette: { from: "from-[#F4D4C0]", via: "via-[#F0E5D8]", to: "to-[#FAF3E8]" },
     dna: {
-      colors: ["#0F172A", "#A78BFA", "#FDE68A"],
+      colors: ["#FAF5F0", "#C8B9A6", "#9CAF88", "#D4967C"],
       fonts: ["General Sans", "DM Serif"],
-      tone: "Soft • Minimal • Elevated",
+      tone: "Timeless • Minimal • Elevated",
     },
   },
   {
     id: "lilydale",
     name: "Lilydale",
-    campaign: "Lint existing photoshoot for brand consistency drift",
+    campaign: "Fresh content creation for trusted farm-to-table poultry brand",
     status: "attention",
+    url: "https://lillydal-vis-prasset-vid.vercel.app",
     palette: { from: "from-[#E8A587]", via: "via-[#A8C5E0]", to: "to-[#B4D7A8]" },
     dna: {
-      colors: ["#0B1220", "#10B981", "#06B6D4"],
+      colors: ["#3B7A4E", "#87CEEB", "#FFFFFF", "#A8D5BA"],
       fonts: ["Satoshi", "Source Serif"],
-      tone: "Crisp • Natural • Adventurous",
+      tone: "Fresh • Natural • Wholesome",
     },
   },
   {
