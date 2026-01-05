@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Database,
   ShieldCheck,
@@ -18,14 +18,7 @@ import {
   Lock,
   Server,
   Activity,
-  Check,
-  Cpu,
-  Terminal,
-  MoreHorizontal,
-  Image as ImageIcon,
-  Play,
-  GitCommit,
-  CircuitBoard
+  Check
 } from "lucide-react";
 
 // -----------------------------------------------------------------------------
@@ -38,14 +31,15 @@ const clients = [
     id: "jenni-kayne",
     name: "Jenni Kayne",
     status: "Review",
-    theme: "light",
     description: "Consistency without sameness.",
     url: "https://jkbrandstudiosai-vis.vercel.app",
-    insights: [
-      "Cycle time reduced by 40% for seasonal campaign assets.",
-      "Governance issues dropped 70% via automated Quality Gates.",
-      "Human Intelligence layer refining 'California Minimal' tone."
+    brandFidelity: "98.2%",
+    asks: [
+      "Prove AI can deliver model and clothing realness at brand quality.",
+      "Maintain exact model likeness across all generated assets.",
+      "Extend photo shoots and create video from stills—preserving tone."
     ],
+    askLink: "#", // Placeholder link
     // "Client Pack" Modules
     solutions: [
       { title: "Visual DNA Archive", icon: Fingerprint, desc: "Living archive of 'California Minimal'." },
@@ -58,20 +52,21 @@ const clients = [
     id: "cylndr",
     name: "CYLNDR",
     status: "Running",
-    theme: "dark",
     description: "Coherence under compression.",
     url: "https://cyndr-dysply.vercel.app",
-    insights: [
-      "Localized asset volume up 320% across regional markets.",
-      "Turnaround time decreased by 65% for adaptation requests.",
-      "Tech-forward motion graphics aligning 98% with Brand Grade."
+    brandFidelity: "96.9%",
+    asks: [
+      "60 AI-generated images for rapid merch drop deployment.",
+      "40 AI-generated videos with consistent brand styling.",
+      "48-hour turnaround for on-brand asset delivery."
     ],
+    askLink: "#", // Placeholder link
     // "Client Pack" Modules
     solutions: [
-      { title: "Global Asset DB", icon: Globe, desc: "Centralized network-wide memory." },
-      { title: "Adaptation Engine", icon: Zap, desc: "High-velocity localization & motion." },
-      { title: "Compliance Check", icon: Lock, desc: "Strict brand & legal guardrails." },
-      { title: "Regional Audit", icon: Layers, desc: "Distributed human review & logs." }
+      { title: "Concept Creation", icon: BrainCircuit, desc: "Initial ideation and direction setting." },
+      { title: "Asset Adaptation", icon: Zap, desc: "Tailoring assets to local or brand-specific needs." },
+      { title: "Creative Studio", icon: Wand2, desc: "Production and refinement of creative outputs." },
+      { title: "Compliance Check", icon: Lock, desc: "Final legal and brand governance review." }
     ]
   }
 ];
@@ -80,207 +75,77 @@ const clients = [
 // UI Components
 // -----------------------------------------------------------------------------
 
-function TechLabel({ children }) {
+function ThemeLabel({ children }) {
   return (
-    <div className="flex items-center gap-2 mb-3 opacity-80">
-      <div className="w-1.5 h-1.5 bg-[#D97943] rounded-sm" />
-      <span className="text-[10px] uppercase tracking-[0.2em] text-[#1a2b4d] font-mono font-medium">
+    <div className="flex items-center gap-3 mb-4">
+      <span className="text-[10px] uppercase tracking-[0.25em] text-[#D97943] font-bold font-sans whitespace-nowrap">
         {children}
       </span>
-      <div className="h-[1px] flex-1 bg-gradient-to-r from-[#1a2b4d]/20 to-transparent" />
+      <div className="h-[1px] flex-1 bg-[#D97943]/30" />
     </div>
   );
 }
 
-function TechCard({ children, className = "", noPadding = false }) {
+function SectionCard({ children, className = "" }) {
   return (
-    <div className={`relative bg-[#FDFBF7] border border-[#1a2b4d]/10 shadow-[2px_4px_16px_rgba(26,43,77,0.03)] overflow-hidden group ${className}`}>
-      {/* Tech Corners */}
-      <div className="absolute top-0 left-0 w-2 h-2 border-l border-t border-[#D97943]/40" />
-      <div className="absolute top-0 right-0 w-2 h-2 border-r border-t border-[#D97943]/40" />
-      <div className="absolute bottom-0 left-0 w-2 h-2 border-l border-b border-[#D97943]/40" />
-      <div className="absolute bottom-0 right-0 w-2 h-2 border-r border-b border-[#D97943]/40" />
-      
-      <div className={`${noPadding ? "" : "p-6"}`}>
-        {children}
-      </div>
+    <div className={`rounded-xl border border-[#E8DDD1] bg-white/60 p-6 shadow-sm backdrop-blur-xl ${className}`}>
+      {children}
     </div>
   );
 }
 
-function StatusChip({ label, active = false }) {
+function Badge({ status }) {
+  const styles = {
+    Running: "bg-[#e3f6ea] text-[#2f9a63] border-[#2f9a63]/20",
+    Review: "bg-[#FFF5F0] text-[#D97943] border-[#D97943]/20",
+    Attention: "bg-[#FFF0E6] text-[#C8632B] border-[#C8632B]/20",
+  };
   return (
-    <div className={`px-2 py-1 rounded-sm border text-[9px] font-mono uppercase tracking-wider ${
-      active 
-      ? "bg-[#D97943]/10 border-[#D97943] text-[#D97943]" 
-      : "bg-white border-[#1a2b4d]/10 text-[#6B7280]"
-    }`}>
+    <span className={`px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider border ${styles[status] || styles.Running}`}>
+      {status}
+    </span>
+  );
+}
+
+function StatusChip({ label }) {
+  return (
+    <div className="px-3 py-1 rounded-full bg-[#1a2b4d]/5 border border-[#1a2b4d]/10 text-[10px] font-mono font-medium text-[#1a2b4d] uppercase tracking-wider">
       {label}
     </div>
   );
 }
 
-function BrandFidelityMetric() {
+function BrandFidelityCard({ client }) {
   return (
-    <TechCard className="h-full">
-       <div className="flex justify-between items-start mb-6">
-          <div>
-             <div className="text-[9px] uppercase tracking-[0.2em] text-[#6B7280] font-mono mb-1">Compute Score</div>
-             <div className="text-[9px] uppercase tracking-[0.2em] text-[#1a2b4d] font-bold">Brand Fidelity</div>
+    <div className="bg-white rounded-lg border border-[#E8DDD1] p-5 shadow-sm">
+      <div className="flex justify-between items-center mb-4 border-b border-[#E8DDD1] pb-3">
+        <div>
+          <div className="text-[10px] uppercase tracking-widest text-[#6B7280] font-bold">Brand Fidelity</div>
+          <div className="text-2xl font-display font-semibold text-[#1a2b4d] mt-1">{client.brandFidelity}</div>
+        </div>
+      </div>
+      <div className="space-y-2">
+        {[
+          { label: "Brand Similarity", status: "Strong" },
+          { label: "Color Alignment", status: "Strong" },
+          { label: "Visual Consistency", status: "Strong" },
+          { label: "Composition", status: "Review", warn: true },
+        ].map((item) => (
+          <div key={item.label} className="flex items-center justify-between text-xs">
+            <span className="text-[#6B7280]">{item.label}</span>
+            <div className="flex items-center gap-1.5">
+              {item.warn ? (
+                <div className="w-1.5 h-1.5 rounded-full bg-[#D97943]" />
+              ) : (
+                <Check className="w-3 h-3 text-[#2f9a63]" />
+              )}
+              <span className={`font-medium ${item.warn ? "text-[#D97943]" : "text-[#1a2b4d]"}`}>{item.status}</span>
+            </div>
           </div>
-          <div className="px-2 py-0.5 border border-[#2f9a63] text-[#2f9a63] text-[9px] font-mono uppercase tracking-widest bg-[#2f9a63]/5">
-            Auto-Pass
-          </div>
-       </div>
-
-       <div className="flex items-end gap-3 mb-6">
-          <div className="text-5xl font-light text-[#1a2b4d] tracking-tighter">92.1<span className="text-2xl text-[#D97943]">%</span></div>
-       </div>
-
-       <div className="space-y-3 pt-4 border-t border-[#1a2b4d]/5">
-          {[
-             { label: "Visual DNA Match", val: 98 },
-             { label: "Tone Compliance", val: 94 },
-             { label: "Composition Drift", val: 82, warn: true }
-          ].map((m, i) => (
-             <div key={i} className="group">
-                <div className="flex justify-between text-[10px] font-mono text-[#6B7280] mb-1">
-                   <span>{m.label}</span>
-                   <span className={m.warn ? "text-[#D97943]" : ""}>{m.val}%</span>
-                </div>
-                <div className="h-1 w-full bg-[#1a2b4d]/5 overflow-hidden">
-                   <div 
-                      className={`h-full ${m.warn ? "bg-[#D97943]" : "bg-[#1a2b4d]"}`} 
-                      style={{ width: `${m.val}%` }}
-                   />
-                </div>
-             </div>
-          ))}
-       </div>
-    </TechCard>
+        ))}
+      </div>
+    </div>
   );
-}
-
-// Simulated Website Previews (Sidebar Crop Style)
-function WebsiteMock({ client }) {
-  if (client.id === "jenni-kayne") {
-    return (
-      <div className="w-full h-full bg-[#FAF9F6] flex overflow-hidden relative font-serif">
-        {/* Sidebar (Left Side of Screen) */}
-        <div className="w-[140px] h-full bg-white border-r border-[#E8DDD1] flex flex-col pt-6 px-4 shrink-0 shadow-[2px_0_10px_rgba(0,0,0,0.02)] z-10">
-            <div className="text-xl font-bold text-[#1a2b4d] italic mb-8 tracking-tight">JK Studios</div>
-            <div className="space-y-6">
-                <div className="text-[8px] uppercase tracking-widest text-[#6B7280] font-sans">Main Menu</div>
-                <div className="space-y-3">
-                    <div className="flex items-center gap-2 text-[#1a2b4d] font-medium text-xs font-sans bg-[#F5F1EB] p-2 rounded -mx-2">
-                        <div className="w-1.5 h-1.5 bg-[#D97943] rounded-full" />
-                        Dashboard
-                    </div>
-                    <div className="flex items-center gap-2 text-[#6B7280] text-xs font-sans pl-1 hover:text-[#1a2b4d] transition-colors cursor-pointer">Campaigns</div>
-                    <div className="flex items-center gap-2 text-[#6B7280] text-xs font-sans pl-1 hover:text-[#1a2b4d] transition-colors cursor-pointer">Assets</div>
-                    <div className="flex items-center gap-2 text-[#6B7280] text-xs font-sans pl-1 hover:text-[#1a2b4d] transition-colors cursor-pointer">Insights</div>
-                </div>
-            </div>
-            <div className="mt-auto mb-4 p-3 bg-[#F5F1EB] rounded text-center">
-                <div className="text-[8px] uppercase tracking-wider text-[#6B7280] font-sans mb-1">Storage</div>
-                <div className="w-full h-1 bg-[#E8DDD1] rounded-full overflow-hidden">
-                    <div className="w-2/3 h-full bg-[#D97943]" />
-                </div>
-            </div>
-        </div>
-        
-        {/* Sliver of Main Content */}
-        <div className="flex-1 p-8 bg-[#FAF9F6]">
-            <div className="flex items-baseline justify-between mb-6 border-b border-[#E8DDD1] pb-4">
-                 <h2 className="text-xl text-[#1a2b4d] italic">Summer '26</h2>
-                 <span className="text-[9px] font-sans text-[#D97943] border border-[#D97943]/30 px-2 py-0.5 rounded-full uppercase tracking-widest bg-[#D97943]/5">Drafting</span>
-            </div>
-            <div className="grid grid-cols-2 gap-3 opacity-80">
-                 <div className="aspect-[3/4] bg-[#EBE5DA] relative group cursor-pointer overflow-hidden">
-                     <ImageIcon className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white w-6 h-6 opacity-50" />
-                     <div className="absolute bottom-0 left-0 right-0 p-2 bg-white/90 text-[8px] font-sans text-[#1a2b4d] translate-y-full group-hover:translate-y-0 transition-transform">img_2026_cam_01.raw</div>
-                 </div>
-                 <div className="aspect-[3/4] bg-[#EBE5DA] relative group cursor-pointer overflow-hidden">
-                      <ImageIcon className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white w-6 h-6 opacity-50" />
-                 </div>
-            </div>
-        </div>
-      </div>
-    )
-  }
-
-  if (client.id === "cylndr") {
-    return (
-      <div className="w-full h-full bg-[#0F172A] flex overflow-hidden relative font-sans text-white">
-         {/* Sidebar */}
-         <div className="w-[140px] h-full bg-[#020617] border-r border-white/10 flex flex-col pt-6 px-3 shrink-0 shadow-xl z-10">
-             <div className="flex items-center gap-2 mb-8 px-2">
-                 <div className="w-4 h-4 rounded bg-[#3B82F6] flex items-center justify-center">
-                    <div className="w-2 h-2 bg-white rounded-full" />
-                 </div>
-                 <span className="font-bold text-sm tracking-tighter font-mono">CYLNDR</span>
-             </div>
-             
-             <div className="space-y-1">
-                 <div className="flex items-center gap-3 p-2 bg-[#3B82F6]/10 text-[#3B82F6] rounded text-[10px] font-mono border border-[#3B82F6]/20 cursor-default">
-                     <Activity className="w-3 h-3" />
-                     MONITOR_01
-                 </div>
-                 <div className="flex items-center gap-3 p-2 text-slate-400 hover:text-white rounded text-[10px] font-mono transition-colors cursor-pointer">
-                     <Database className="w-3 h-3" />
-                     INGEST_DB
-                 </div>
-                 <div className="flex items-center gap-3 p-2 text-slate-400 hover:text-white rounded text-[10px] font-mono transition-colors cursor-pointer">
-                     <Cpu className="w-3 h-3" />
-                     RENDER_FARM
-                 </div>
-                 <div className="flex items-center gap-3 p-2 text-slate-400 hover:text-white rounded text-[10px] font-mono transition-colors cursor-pointer">
-                     <ShieldCheck className="w-3 h-3" />
-                     AUDIT_LOGS
-                 </div>
-             </div>
-             
-             <div className="mt-auto border-t border-white/10 pt-4 pb-4 px-2">
-                 <div className="flex justify-between text-[8px] text-slate-400 font-mono mb-1">
-                     <span>CPU_LOAD</span>
-                     <span className="text-red-400">98%</span>
-                 </div>
-                 <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
-                     <div className="w-[98%] h-full bg-red-500 animate-pulse" />
-                 </div>
-             </div>
-         </div>
-
-         {/* Content Sliver */}
-         <div className="flex-1 p-6 bg-[#0F172A]">
-             <div className="flex items-center gap-2 mb-6 text-slate-500 text-[10px] font-mono border-b border-white/5 pb-2">
-                 <span>/</span>
-                 <span className="hover:text-[#3B82F6] cursor-pointer">SYS_ROOT</span>
-                 <span>/</span>
-                 <span className="text-white">LIVE_DASHBOARD</span>
-             </div>
-             
-             <div className="grid gap-3">
-                 <div className="p-3 bg-[#1E293B] border border-white/5 rounded flex justify-between items-center group cursor-pointer hover:border-[#3B82F6]/30 transition-colors">
-                     <div>
-                        <div className="text-[8px] text-slate-500 uppercase tracking-widest mb-1">Throughput</div>
-                        <div className="text-lg font-mono tracking-tight group-hover:text-[#3B82F6] transition-colors">2.4 TB/s</div>
-                     </div>
-                     <Activity className="w-4 h-4 text-[#3B82F6]" />
-                 </div>
-                 <div className="p-3 bg-[#1E293B] border border-white/5 rounded relative overflow-hidden h-24">
-                     <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.02)_50%,transparent_75%)] bg-[length:250%_250%] animate-[pulse_4s_ease-in-out_infinite]" />
-                     <div className="flex gap-1 items-end h-full w-full justify-between px-1 pb-1">
-                         {[40, 60, 35, 80, 50, 90, 45, 70, 30, 60].map((h, i) => (
-                             <div key={i} className="w-1.5 bg-[#3B82F6] opacity-60 rounded-t-sm transition-all duration-500" style={{ height: `${h}%` }} />
-                         ))}
-                     </div>
-                 </div>
-             </div>
-         </div>
-      </div>
-    )
-  }
 }
 
 // -----------------------------------------------------------------------------
@@ -289,9 +154,10 @@ function WebsiteMock({ client }) {
 
 export default function BrandIntelligenceDiagram() {
   const [selectedClientId, setSelectedClientId] = useState("jenni-kayne");
+
   const client = useMemo(() => clients.find(c => c.id === selectedClientId), [selectedClientId]);
 
-  // Operating System Lanes - Full Copy Restored
+  // Operating System Lanes - Updated Language
   const lanes = [
     {
       step: "01",
@@ -307,7 +173,7 @@ export default function BrandIntelligenceDiagram() {
     },
     {
       step: "03",
-      title: "Brand Grade + Drift", 
+      title: "Brand Grade + Drift Control", // Updated Title
       icon: ShieldCheck,
       desc: "Moves work forward when thresholds are met, or routes to HITL.",
     },
@@ -323,258 +189,226 @@ export default function BrandIntelligenceDiagram() {
       icon: BrainCircuit,
       desc: "Turns outcomes into learning. Updates Brand Memory.",
     },
-    {
-      step: "06",
-      title: "Activation & Dist", 
-      icon: Share2,
-      desc: "Headless delivery across regions, agencies, and channels.",
-      chips: ["DAM", "CMS", "Media", "Commerce"]
-    },
   ];
 
   return (
-    <div className="min-h-screen w-full bg-[#F2EFE9] text-[#1a2b4d] font-sans selection:bg-[#D97943]/20 pb-20 relative overflow-hidden">
-      
-      {/* Background Grid Texture */}
-      <div 
-        className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none"
-        style={{
-          backgroundImage: `linear-gradient(#1a2b4d 1px, transparent 1px), linear-gradient(90deg, #1a2b4d 1px, transparent 1px)`,
-          backgroundSize: '40px 40px'
-        }}
-      />
-      
-      {/* Subtle Grain */}
-      <div className="absolute inset-0 z-0 opacity-[0.4] pointer-events-none mix-blend-multiply" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.5'/%3E%3C/svg%3E")` }} />
+    <div className="min-h-screen w-full bg-[#F5F1EB] text-[#1a2b4d] font-sans selection:bg-[#D97943]/20 pb-20">
+      <div className="mx-auto max-w-7xl px-6 py-10 space-y-12">
 
-      <div className="relative z-10 mx-auto max-w-[1400px] px-6 py-8 space-y-10">
-        
-        {/* HEADER: Technical Console */}
-        <header className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-[#1a2b4d]/10">
-          <div className="space-y-1">
-             <div className="flex items-center gap-2 mb-2">
-                <div className="w-2 h-2 bg-[#D97943]" />
-                <p className="text-[10px] uppercase tracking-[0.3em] font-mono text-[#1a2b4d]/60">
-                  Proforma Dashboard
-                </p>
-             </div>
-             <h1 className="text-3xl lg:text-5xl font-light tracking-[-0.03em] text-[#1a2b4d]">
-               BrandStudios<span className="font-serif italic font-bold text-[#D97943]">.AI</span> OS
-             </h1>
-             <p className="text-sm text-[#6B7280] font-mono mt-1">
-                Session view: <span className="text-[#1a2b4d] font-semibold">Jenni Kayne</span> <span className="text-[#D97943]">+</span> <span className="text-[#1a2b4d] font-semibold">CYLNDR</span>
-             </p>
+        {/* HEADER: OS Console Style */}
+        <header className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b border-[#D97943]/20 pb-6">
+          <div className="space-y-2">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-[#1a2b4d] tracking-tight">
+              BrandStudios.AI Operating System
+            </h1>
+            <p className="text-base md:text-lg text-[#6B7280] font-sans font-medium">
+              Session view: <span className="text-[#1a2b4d]">Jenni Kayne</span> <span className="text-[#D97943]">+</span> <span className="text-[#1a2b4d]">CYLNDR</span>
+            </p>
           </div>
-          
           <div className="flex flex-col items-end gap-3">
-             <div className="flex gap-2 mb-1">
-                <StatusChip label="Governance: Active" active />
-                <StatusChip label="HITL: Required" active />
-                <StatusChip label="Build: v2.0" />
-             </div>
-             
-             <div className="flex items-center gap-8">
-                <div className="text-right hidden md:block">
-                   <p className="text-[9px] uppercase tracking-widest text-[#6B7280] font-mono mb-1">Active Pilots</p>
-                   <p className="text-xl font-mono text-[#1a2b4d]">2</p>
-                </div>
-                <div className="text-right hidden md:block">
-                   <p className="text-[9px] uppercase tracking-widest text-[#6B7280] font-mono mb-1">Assets Governed</p>
-                   <p className="text-xl font-mono text-[#1a2b4d]">12,402 <span className="text-xs text-[#6B7280]">(Pilot)</span></p>
-                </div>
-             </div>
+            <div className="flex flex-wrap items-center justify-end gap-3 mb-2">
+              <StatusChip label="Governance: Active" />
+              <StatusChip label="HITL: Required" />
+              <StatusChip label="Build: v2.0" />
+            </div>
+            {/* Safe-harbored Metrics */}
+            <div className="flex items-center gap-6">
+              <div className="text-right">
+                <p className="text-[9px] uppercase tracking-[0.2em] text-[#6B7280]">Active Pilots</p>
+                <p className="text-xl font-display text-[#1a2b4d]">2</p>
+              </div>
+            </div>
           </div>
         </header>
 
-        {/* MAIN DASHBOARD GRID */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          
-          {/* LEFT: Client Select & Metrics (3 Cols) */}
-          <div className="lg:col-span-3 flex flex-col gap-6">
-            <nav aria-label="Client Selector">
-              <TechLabel>Active Workstreams</TechLabel>
-              <div className="space-y-2">
+        {/* SECTION 1: Client & Governance */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+          {/* Left Column: Client Selector & Fidelity (4 Cols) */}
+          <div className="lg:col-span-4 flex flex-col gap-8">
+            <div>
+              <ThemeLabel>CLIENT</ThemeLabel>
+              <div className="space-y-3">
                 {clients.map((c) => (
                   <button
                     key={c.id}
                     onClick={() => setSelectedClientId(c.id)}
-                    className={`w-full group relative overflow-hidden text-left p-4 transition-all duration-300 border ${
-                      selectedClientId === c.id
-                        ? "bg-[#1a2b4d] border-[#1a2b4d] text-[#F5F1EB] shadow-lg"
-                        : "bg-white border-transparent hover:border-[#1a2b4d]/20 text-[#6B7280]"
-                    }`}
+                    className={`w-full text-left p-4 rounded-xl border transition-all duration-200 group ${selectedClientId === c.id
+                      ? "bg-white border-[#D97943] shadow-lg ring-1 ring-[#D97943]/10"
+                      : "bg-white/40 border-[#E8DDD1] hover:bg-white/80 hover:border-[#D97943]/50"
+                      }`}
                   >
-                    <div className="flex justify-between items-start mb-2">
-                      <span className={`font-mono text-sm uppercase tracking-wider font-bold ${selectedClientId === c.id ? "text-[#D97943]" : "text-[#1a2b4d]"}`}>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className={`font-display font-semibold text-xl ${selectedClientId === c.id ? "text-[#1a2b4d]" : "text-[#6B7280]"}`}>
                         {c.name}
                       </span>
-                      {selectedClientId === c.id && <Activity className="w-3 h-3 text-[#D97943]" />}
+                      <Badge status={c.status} />
                     </div>
-                    <div className="flex items-center justify-between">
-                       <span className="text-[10px] opacity-70 font-mono">{c.status} Protocol</span>
-                       <ArrowUpRight className={`w-3 h-3 transition-transform ${selectedClientId === c.id ? "translate-x-0 opacity-100" : "-translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"}`} />
-                    </div>
+                    <p className="text-xs text-[#6B7280] font-light italic">
+                      {c.description}
+                    </p>
                   </button>
                 ))}
               </div>
-            </nav>
+            </div>
 
+            {/* Governance Anchor: Brand Fidelity Widget */}
             <div>
-               <TechLabel>Governance Proof</TechLabel>
-               <BrandFidelityMetric />
+              <ThemeLabel>GOVERNANCE PROOF</ThemeLabel>
+              <BrandFidelityCard client={client} />
+              <div className="mt-3 text-[10px] text-[#6B7280] text-center italic">
+                Real-time signal from active pilot data
+              </div>
             </div>
           </div>
 
-          {/* MIDDLE: Active Modules (6 Cols) */}
-          <div className="lg:col-span-6 flex flex-col gap-6">
-             <div>
-                <TechLabel>Client Pack (Installed Modules)</TechLabel>
-                <div className="grid grid-cols-2 gap-4">
-                   {client.solutions.map((sol, i) => (
-                      <TechCard key={i} className="hover:-translate-y-1 transition-transform duration-300 cursor-default bg-white">
-                         <div className="flex items-start justify-between mb-4">
-                            <sol.icon className="w-5 h-5 text-[#D97943]" />
-                            <div className="text-[9px] font-mono text-[#1a2b4d]/40">MOD_0{i+1}</div>
-                         </div>
-                         <h3 className="text-sm font-bold text-[#1a2b4d] mb-2">{sol.title}</h3>
-                         <p className="text-xs text-[#6B7280] leading-relaxed border-t border-[#1a2b4d]/5 pt-2">
-                            {sol.desc}
-                         </p>
-                      </TechCard>
-                   ))}
-                </div>
-             </div>
+          {/* Right Column: Client Pack & Insights (8 Cols) */}
+          <div className="lg:col-span-8 flex flex-col gap-8">
 
-             <div>
-                <TechLabel>Insights (Live Feed)</TechLabel>
-                <TechCard className="bg-[#1a2b4d] text-white h-full min-h-[200px]" noPadding>
-                   <div className="p-3 border-b border-white/10 flex justify-between items-center bg-[#152340]">
-                      <div className="flex items-center gap-2">
-                         <Terminal className="w-4 h-4 text-[#D97943]" />
-                         <span className="font-mono text-[10px] text-[#D97943] uppercase tracking-wider">System_Output_Log</span>
-                      </div>
-                      <div className="flex gap-1.5">
-                         <div className="w-1.5 h-1.5 rounded-full bg-[#FF5F56]" />
-                         <div className="w-1.5 h-1.5 rounded-full bg-[#FFBD2E]" />
-                         <div className="w-1.5 h-1.5 rounded-full bg-[#27C93F]" />
-                      </div>
-                   </div>
-                   <div className="p-5 font-mono text-sm leading-relaxed space-y-4">
-                      {client.insights.map((insight, i) => (
-                         <div key={i} className="flex gap-3 items-start group">
-                            <span className="text-white/50 select-none whitespace-nowrap font-medium">{`0${i+1}::`}</span>
-                            <div className="flex-1 text-white group-hover:text-white transition-colors font-medium">
-                               <span className="text-[#D97943] mr-2 font-bold">{`>`}</span>
-                               {insight}
-                            </div>
-                         </div>
-                      ))}
-                      <div className="flex gap-2 items-center text-[#D97943] animate-pulse pt-2">
-                         <span className="select-none">{`_`}</span>
-                      </div>
-                   </div>
-                </TechCard>
-             </div>
-          </div>
+            {/* Client Pack (Installed Modules) */}
+            <div>
+              <ThemeLabel>CLIENT PACK (INSTALLED MODULES)</ThemeLabel>
+              <div className="bg-white/60 backdrop-blur-xl rounded-xl border border-[#E8DDD1] shadow-sm overflow-hidden">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+                  {client.solutions.map((sol, i) => (
+                    <div
+                      key={sol.title}
+                      className={`
+                            relative p-6 group cursor-default
+                            border-b sm:border-b-0 lg:border-r border-[#E8DDD1] last:border-r-0
+                            hover:bg-white transition-colors
+                          `}
+                    >
+                      {/* Puzzle Notch visual for interlocking look */}
+                      {i < 3 && (
+                        <div className="hidden lg:block absolute -right-[6px] top-1/2 -translate-y-1/2 w-[11px] h-[16px] bg-[#F5F1EB] z-10 rounded-full border border-[#E8DDD1] shadow-inner" />
+                      )}
 
-          {/* RIGHT: Live Preview (3 Cols) */}
-          <div className="lg:col-span-3">
-             <TechLabel>Output Stream</TechLabel>
-             <div className="h-full min-h-[400px] bg-white border border-[#1a2b4d]/10 p-2 relative group flex flex-col">
-                {/* Faux Browser Chrome */}
-                <div className="bg-[#F5F1EB] border-b border-[#E8DDD1] p-2 flex items-center gap-2 mb-2 shrink-0">
-                   <Globe className="w-3 h-3 text-[#6B7280]" />
-                   <div className="flex-1 bg-white h-5 border border-[#E8DDD1] rounded-sm text-[8px] flex items-center px-2 text-[#6B7280] font-mono truncate">
-                      {client.url}
-                   </div>
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="text-[#D97943] group-hover:scale-110 transition-transform duration-300">
+                          <sol.icon className="w-6 h-6" />
+                        </div>
+                      </div>
+                      <h4 className="font-display font-semibold text-base text-[#1a2b4d] mb-1">{sol.title}</h4>
+                      <p className="text-[11px] text-[#6B7280] leading-snug">{sol.desc}</p>
+                    </div>
+                  ))}
                 </div>
-                
-                {/* Visual Mock Area */}
-                <div className="relative flex-1 bg-[#F5F1EB] overflow-hidden border border-[#E8DDD1]/50 group">
-                   <AnimatePresence mode="wait">
-                      <motion.div 
-                        key={client.id}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="w-full h-full"
+              </div>
+            </div>
+
+            {/* The Ask Panel */}
+            <div>
+              <ThemeLabel>THE ASK</ThemeLabel>
+              <SectionCard className="grid md:grid-cols-2 gap-6 items-center">
+                <div className="space-y-4">
+                  <ul className="space-y-4">
+                    {client.asks.map((ask, i) => (
+                      <motion.li
+                        key={selectedClientId + i}
+                        initial={{ opacity: 0, x: 10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: i * 0.1 }}
+                        className="flex items-start gap-3 text-sm text-[#4B5563] leading-relaxed"
                       >
-                         <WebsiteMock client={client} />
-                      </motion.div>
-                   </AnimatePresence>
-                   
-                   {/* Hover Overlay */}
-                   <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-20">
-                      <a 
-                         href={client.url}
-                         target="_blank"
-                         rel="noreferrer"
-                         className="flex items-center gap-2 px-6 py-3 bg-[#1a2b4d] text-white text-xs font-mono uppercase tracking-widest shadow-xl hover:scale-105 transition-transform"
-                      >
-                         Open Live Environment <ArrowUpRight className="w-3 h-3" />
-                      </a>
-                   </div>
+                        <CheckCircle2 className="w-5 h-5 text-[#2f9a63] shrink-0 mt-0.5" />
+                        <span>{ask}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
+                  {client.askLink && client.askLink !== "#" && (
+                    <a
+                      href={client.askLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm text-[#D97943] hover:text-[#b96232] font-medium mt-2"
+                    >
+                      Learn more <ArrowUpRight className="w-4 h-4" />
+                    </a>
+                  )}
                 </div>
-             </div>
+                <div className="flex flex-col items-center justify-center p-6 bg-[#F5F1EB]/50 rounded-xl border border-[#E8DDD1] text-center space-y-3">
+                  <div className="text-[10px] uppercase tracking-widest text-[#6B7280]">Live Environment</div>
+                  <h3 className="font-display text-2xl text-[#1a2b4d]">{client.name} Dashboard</h3>
+                  <a
+                    href={client.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 bg-[#D97943] text-white px-6 py-2.5 rounded-lg font-medium text-sm hover:bg-[#b96232] transition-colors shadow-md hover:shadow-lg"
+                  >
+                    View Dashboard <ArrowUpRight className="w-4 h-4" />
+                  </a>
+                </div>
+              </SectionCard>
+            </div>
           </div>
         </div>
 
-        {/* SECTION 2: System Architecture (Bus Layout) */}
-        <div className="mt-12 pt-8 relative">
-           {/* Section Title as a Chip on the Bus */}
-           <div className="absolute top-0 left-8 -translate-x-1/2 bg-[#F2EFE9] px-4 text-[#D97943] font-mono text-[9px] uppercase tracking-widest flex items-center gap-2 z-10">
-                <CircuitBoard className="w-3 h-3" />
-                OS Governance Bus • v2.6.0
-           </div>
+        {/* SECTION 2: OS Core Services */}
+        <div>
+          <div className="flex items-center gap-4 mb-4">
+            <span className="text-[10px] uppercase tracking-[0.25em] text-[#D97943] font-bold font-sans whitespace-nowrap">
+              OS CORE SERVICES (ALWAYS ON)
+            </span>
+            <div className="h-[1px] flex-1 bg-[#D97943]/30" />
+            <div className="hidden sm:flex items-center gap-2 px-3 py-1 bg-[#FFF5F0] border border-[#D97943]/20 rounded-full">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#D97943]" />
+              <span className="text-[10px] font-bold text-[#D97943] uppercase tracking-wide">Ship-Gate: auto-pass ≥ 90%</span>
+            </div>
+          </div>
 
-           {/* The Bus Line */}
-           <div className="absolute top-0 left-0 right-0 h-[2px] bg-[#1a2b4d]/10" />
-           <div className="absolute top-0 left-0 w-8 h-[2px] bg-[#D97943]" />
+          <div className="relative pt-6">
+            {/* Bus Line - Faint backplane */}
+            <div className="hidden lg:block absolute top-[3.5rem] left-0 right-0 h-[6px] bg-[#E8DDD1]/40 border-y border-[#E8DDD1] z-0" />
 
-           {/* Vertical Connectors Container */}
-           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 pt-6">
-               {lanes.map((lane, i) => (
-                  <div key={lane.title} className="relative group">
-                      {/* Vertical Trace Line to Bus */}
-                      <div className="absolute -top-[24px] left-1/2 -translate-x-1/2 w-[1px] h-[24px] bg-[#1a2b4d]/10 group-hover:bg-[#D97943] transition-colors" />
-                      
-                      {/* Connector Dot on Bus */}
-                      <div className="absolute -top-[27px] left-1/2 -translate-x-1/2 w-[5px] h-[5px] rounded-full bg-[#1a2b4d]/20 group-hover:bg-[#D97943] transition-colors" />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+              {lanes.map((lane, i) => (
+                <div key={lane.title} className="relative z-10 h-full">
+                  <div className="h-full bg-white rounded-xl border border-[#E8DDD1] p-5 hover:border-[#D97943] hover:shadow-lg transition-all group flex flex-col shadow-[0_4px_20px_rgba(0,0,0,0.02)]">
 
-                      {/* Hardware Module Card */}
-                      <div className="bg-white border border-[#1a2b4d]/10 p-4 h-full hover:border-[#D97943] transition-all duration-300 relative z-10 shadow-sm hover:shadow-md flex flex-col group-hover:-translate-y-1">
-                          
-                          {/* Module Header */}
-                          <div className="flex justify-between items-center mb-3 pb-2 border-b border-[#1a2b4d]/5 border-dashed">
-                             <span className="text-[9px] font-mono text-[#1a2b4d]/40 group-hover:text-[#D97943] transition-colors">
-                               SYS.0{i+1}
-                             </span>
-                             <div className="w-1.5 h-1.5 rounded-full bg-[#2f9a63] animate-pulse" />
-                          </div>
+                    {/* Bus Connector (Vertical) */}
+                    <div className="hidden lg:block absolute -top-[24px] left-1/2 -translate-x-1/2 w-[2px] h-[24px] bg-[#E8DDD1] group-hover:bg-[#D97943] transition-colors" />
+                    <div className="hidden lg:block absolute -top-[4px] left-1/2 -translate-x-1/2 w-[6px] h-[6px] rounded-full border border-[#E8DDD1] bg-white group-hover:border-[#D97943] transition-colors" />
 
-                          <div className="flex items-center gap-2 mb-2">
-                             <lane.icon className="w-4 h-4 text-[#D97943]" />
-                             <h4 className="text-xs font-bold uppercase tracking-tight text-[#1a2b4d] leading-none">{lane.title}</h4>
-                          </div>
-                          
-                          <p className="text-[10px] text-[#6B7280] leading-snug mb-3">
-                             {lane.desc}
-                          </p>
+                    {/* Step Number */}
+                    <div className="w-6 h-6 rounded-full bg-[#1a2b4d] text-[#F5F1EB] flex items-center justify-center font-mono text-[10px] font-bold shadow-md mb-3 group-hover:bg-[#D97943] transition-colors">
+                      {lane.step}
+                    </div>
 
-                          {lane.chips && (
-                            <div className="mt-auto flex flex-wrap gap-1 pt-2">
-                               {lane.chips.map(chip => (
-                                 <span key={chip} className="px-1 py-0.5 bg-[#F5F1EB] text-[8px] text-[#6B7280] font-mono border border-[#E8DDD1] rounded-sm">
-                                   {chip}
-                                 </span>
-                               ))}
-                            </div>
-                          )}
+                    <div className="flex items-center gap-2 mb-2">
+                      <lane.icon className="w-5 h-5 text-[#D97943]" />
+                      <h4 className="text-sm font-bold uppercase tracking-tight text-[#1a2b4d] leading-tight">{lane.title}</h4>
+                    </div>
+
+                    <p className="text-xs text-[#6B7280] leading-relaxed mb-3">
+                      {lane.desc}
+                    </p>
+
+                    {lane.chips && (
+                      <div className="mt-auto flex flex-wrap gap-1 pt-2 border-t border-[#F5F1EB]">
+                        {lane.chips.map(chip => (
+                          <span key={chip} className="px-1.5 py-0.5 rounded bg-[#F5F1EB] text-[9px] text-[#6B7280] font-medium border border-[#E8DDD1]">
+                            {chip}
+                          </span>
+                        ))}
                       </div>
+                    )}
                   </div>
-               ))}
-           </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-12 flex justify-center items-center gap-6 opacity-60">
+            <div className="flex items-center gap-2">
+              <Server className="w-3 h-3 text-[#6B7280]" />
+              <span className="text-[10px] text-[#6B7280] font-mono">System Status: Nominal</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Activity className="w-3 h-3 text-[#6B7280]" />
+              <span className="text-[10px] text-[#6B7280] font-mono">Drift Monitoring: Active</span>
+            </div>
+          </div>
         </div>
 
       </div>

@@ -1,6 +1,6 @@
 # Project Baseline: Brand Intelligence Slide
-**Date:** 2026-01-04
-**Version:** 2.0.0 (Baseline)
+**Date:** 2026-01-05
+**Version:** 2.1.0
 
 ## 1. Project Structure
 The current project follows a standard Next.js (Pages Router) structure.
@@ -15,6 +15,9 @@ The current project follows a standard Next.js (Pages Router) structure.
 ├── styles/
 │   └── globals.css                   # Global Styles (Tailwind directives)
 ├── public/                           # Static assets (Currently empty/default)
+├── Docs/
+│   ├── CHANGELOG.md                  # Version history and changes
+│   └── project_baseline_2026_01_04.md
 ├── tailwind.config.js                # Tailwind Config (Default)
 └── package.json                      # Dependencies
 ```
@@ -49,31 +52,33 @@ The application is centralized around a single complex dashboard component.
 This is the core "operating system" view. It contains several simulation sub-components:
 
 #### Internal Components
-- **`TechLabel`**:  Section headers with a specific orange square + gradient line style.
-- **`TechCard`**: The main container for modules, featuring the "tech corner" borders.
+- **`ThemeLabel`**: Section headers with a specific orange square + gradient line style.
+- **`SectionCard`**: Container for content sections with backdrop blur.
+- **`Badge`**: Status indicator (Running, Review, Attention).
 - **`StatusChip`**: Small pills showing status (e.g., "Active", "Governance").
-- **`BrandFidelityMetric`**: A specific card showing the "92.1%" score and breakdown.
-- **`WebsiteMock`**: A dynamic component that changes based on the selected client (`jenni-kayne` vs `cylndr`), rendering a mini-website preview inside the dashboard.
+- **`BrandFidelityCard`**: Client-specific card showing brand fidelity % and breakdown.
 
 #### Data Model
-- **`clients`**: Array containing configuration for "Jenni Kayne" and "CYLNDR".
-- **`lanes`**: Array defining the "OS Governance Bus" steps (Brand Memory, Creative Studio, etc.) at the bottom.
+- **`clients`**: Array containing configuration for "Jenni Kayne" and "CYLNDR" with:
+  - `brandFidelity`: Client-specific percentage (JK: 98.2%, CYLNDR: 96.9%)
+  - `asks`: Client-specific "The Ask" bullet points
+  - `solutions`: Client Pack module configurations
+- **`lanes`**: Array defining 5 "OS Governance Bus" steps (Brand Memory through Insight Loop).
 
 ## 4. Change Log
-**Current State as of Jan 4, 2026**
 
-### [NEW] Design Overhaul v2.0
+### [2.1.0] - 2026-01-05
+- **Header**: Removed "Proforma Dashboard" label and "Assets Governed (Pilot) 12.4k"
+- **Ship-Gate**: Updated to "auto-pass ≥ 90%"
+- **OS Core Services**: Removed Card #06, now 5 cards
+- **Brand Fidelity**: Individualized per client, removed Auto-Pass badge
+- **Insights → The Ask**: Renamed section with client-specific content
+- **CYLNDR Client Pack**: Updated to Concept Creation, Asset Adaptation, Creative Studio, Compliance Check
+
+### [2.0.0] - 2026-01-04
 - **Theme Update**: Shifted to a professional "BrandStudios.AI OS" aesthetic.
 - **Color Logic**: Implemented strict color hierarchy (Navy/Orange/Cream).
-- **Interactive Dashboard**:
-    - Added Client Selector (Switch between Light Mode "Jenni Kayne" and Dark Mode "CYLNDR").
-    - Added animated "Website Mock" previews that react to client selection.
-    - Added "Live Feed" insights panel.
-- **Visuals**:
-    - Background grid texture added.
-    - "Bus" architecture visual at the bottom (OS Governance Bus).
-    - "Tech Corner" styling applied to all cards.
+- **Interactive Dashboard**: Client Selector, Website Mock previews, Live Feed insights.
+- **Visuals**: Background grid texture, Bus architecture, Tech Corner styling.
+- **Dependencies**: `lucide-react` for icons; `framer-motion` for transitions.
 
-### [REF] Refactoring
-- **Consolidation**: Most logic is currently contained within `BrandIntelligenceDiagram.jsx` for ease of editing.
-- **Dependencies**: `lucide-react` used for all iconography; `framer-motion` for transitions.
