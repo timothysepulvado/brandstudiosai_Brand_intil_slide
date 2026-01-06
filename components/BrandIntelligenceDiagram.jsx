@@ -30,14 +30,14 @@ const clients = [
   {
     id: "jenni-kayne",
     name: "Jenni Kayne",
-    status: "Review",
+    status: "Running",
     description: "Consistency without sameness.",
     url: "https://jkbrandstudiosai-vis.vercel.app",
     brandFidelity: "98.2%",
     asks: [
       "Prove AI can deliver model and clothing realness at brand quality.",
-      "Maintain exact model likeness across all generated assets.",
-      "Extend photo shoots and create video from stills—preserving tone."
+      "Maintain consistent model likeness across all generated assets.",
+      "Extend photo shoots without reshoots and create video from stills—preserving tone."
     ],
     askLink: "#", // Placeholder link
     // "Client Pack" Modules
@@ -122,14 +122,15 @@ function BrandFidelityCard({ client }) {
         <div>
           <div className="text-[10px] uppercase tracking-widest text-[#6B7280] font-bold">Brand Fidelity</div>
           <div className="text-2xl font-display font-semibold text-[#1a2b4d] mt-1">{client.brandFidelity}</div>
+          <div className="text-[9px] text-[#6B7280] mt-0.5 italic">Composite: visual DNA + likeness + composition</div>
         </div>
       </div>
       <div className="space-y-2">
         {[
-          { label: "Brand Similarity", status: "Strong" },
+          { label: "DNA Match", status: "Strong" },
           { label: "Color Alignment", status: "Strong" },
           { label: "Visual Consistency", status: "Strong" },
-          { label: "Composition", status: "Review", warn: true },
+          { label: "Composition", status: "Strong" },
         ].map((item) => (
           <div key={item.label} className="flex items-center justify-between text-xs">
             <span className="text-[#6B7280]">{item.label}</span>
@@ -257,7 +258,7 @@ export default function BrandIntelligenceDiagram() {
               <ThemeLabel>GOVERNANCE PROOF</ThemeLabel>
               <BrandFidelityCard client={client} />
               <div className="mt-3 text-[10px] text-[#6B7280] text-center italic">
-                Real-time signal from active pilot data
+                Real-time signal from active pilot data. Used to auto-route work through Ship-Gate and HITL.
               </div>
             </div>
           </div>
@@ -353,7 +354,7 @@ export default function BrandIntelligenceDiagram() {
             <div className="h-[1px] flex-1 bg-[#D97943]/30" />
             <div className="hidden sm:flex items-center gap-2 px-3 py-1 bg-[#FFF5F0] border border-[#D97943]/20 rounded-full">
               <ShieldCheck className="w-3.5 h-3.5 text-[#D97943]" />
-              <span className="text-[10px] font-bold text-[#D97943] uppercase tracking-wide">Ship-Gate: auto-pass ≥ 90%</span>
+              <span className="text-[10px] font-bold text-[#D97943] uppercase tracking-wide">Ship-Gate (Quality Gate): auto-pass ≥ 90%; else HITL</span>
             </div>
           </div>
 
