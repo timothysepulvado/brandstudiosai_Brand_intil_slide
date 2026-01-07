@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>BrandStudios.ai • Investor View</title>
+        <title>BrandStudios.ai • OS HUD</title>
         <meta name="description" content="Brand Intelligence Engine – multi-tenant creative pipeline with evaluators and headless delivery." />
       </Head>
       <main className="min-h-screen bg-[#F5F1EB]">
@@ -16,3 +16,4 @@ export default function Home() {
     </>
   );
 }
+
