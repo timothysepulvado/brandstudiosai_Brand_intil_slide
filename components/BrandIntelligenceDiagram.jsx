@@ -197,7 +197,7 @@ export default function BrandIntelligenceDiagram() {
       <div className="mx-auto max-w-7xl px-6 py-10 space-y-12">
 
         <div className="text-center mb-2">
-          <span className="text-[10px] uppercase tracking-[0.3em] text-[#D97943] font-bold">Privileged and Confidential</span>
+          <span className="text-[12px] uppercase tracking-[0.4em] text-[#1a2b4d]/20 font-bold">Privileged and Confidential</span>
         </div>
 
         {/* HEADER: OS Console Style */}
@@ -209,6 +209,9 @@ export default function BrandIntelligenceDiagram() {
             <p className="text-base md:text-lg text-[#6B7280] font-sans font-medium">
               Session view: <span className="text-[#1a2b4d]">Jenni Kayne</span> <span className="text-[#D97943]">+</span> <span className="text-[#1a2b4d]">CYLNDR</span>
             </p>
+            <div className="mt-2">
+              <span className="inline-block px-3 py-1 rounded-md bg-[#FFF5F0] border border-[#D97943]/30 text-[10px] font-bold uppercase tracking-wider text-[#D97943]">For Demonstration Purposes Only</span>
+            </div>
           </div>
           <div className="flex flex-col items-end gap-3">
             <div className="flex flex-wrap items-center justify-end gap-3 mb-2">
@@ -415,7 +418,6 @@ export default function BrandIntelligenceDiagram() {
                 <span className="text-[10px] text-[#6B7280] font-mono">Drift Monitoring: Active</span>
               </div>
             </div>
-            <span className="text-[9px] uppercase tracking-widest text-[#6B7280]/70 font-medium">For Demonstration Purposes Only</span>
           </div>
         </div>
 
