@@ -120,7 +120,7 @@ function BrandFidelityCard({ client }) {
     <div className="bg-white rounded-lg border border-[#E8DDD1] p-5 shadow-sm">
       <div className="flex justify-between items-center mb-4 border-b border-[#E8DDD1] pb-3">
         <div>
-          <div className="text-[10px] uppercase tracking-widest text-[#6B7280] font-bold">Brand Fidelity</div>
+          <div className="text-[10px] uppercase tracking-widest text-[#6B7280] font-bold">Aggregate Brand Fidelity Score</div>
           <div className="text-2xl font-display font-semibold text-[#1a2b4d] mt-1">{client.brandFidelity}</div>
           <div className="text-[9px] text-[#6B7280] mt-0.5 italic">Composite: visual DNA + likeness + composition</div>
         </div>
@@ -195,6 +195,10 @@ export default function BrandIntelligenceDiagram() {
   return (
     <div className="min-h-screen w-full bg-[#F5F1EB] text-[#1a2b4d] font-sans selection:bg-[#D97943]/20 pb-20">
       <div className="mx-auto max-w-7xl px-6 py-10 space-y-12">
+
+        <div className="text-center mb-2">
+          <span className="text-[10px] uppercase tracking-[0.3em] text-[#D97943] font-bold">Privileged and Confidential</span>
+        </div>
 
         {/* HEADER: OS Console Style */}
         <header className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b border-[#D97943]/20 pb-6">
@@ -400,15 +404,18 @@ export default function BrandIntelligenceDiagram() {
             </div>
           </div>
 
-          <div className="mt-12 flex justify-center items-center gap-6 opacity-60">
-            <div className="flex items-center gap-2">
-              <Server className="w-3 h-3 text-[#6B7280]" />
-              <span className="text-[10px] text-[#6B7280] font-mono">System Status: Nominal</span>
+          <div className="mt-12 flex flex-col justify-center items-center gap-4 opacity-60">
+            <div className="flex justify-center gap-6">
+              <div className="flex items-center gap-2">
+                <Server className="w-3 h-3 text-[#6B7280]" />
+                <span className="text-[10px] text-[#6B7280] font-mono">System Status: Nominal</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Activity className="w-3 h-3 text-[#6B7280]" />
+                <span className="text-[10px] text-[#6B7280] font-mono">Drift Monitoring: Active</span>
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <Activity className="w-3 h-3 text-[#6B7280]" />
-              <span className="text-[10px] text-[#6B7280] font-mono">Drift Monitoring: Active</span>
-            </div>
+            <span className="text-[9px] uppercase tracking-widest text-[#6B7280]/70 font-medium">For Demonstration Purposes Only</span>
           </div>
         </div>
 
