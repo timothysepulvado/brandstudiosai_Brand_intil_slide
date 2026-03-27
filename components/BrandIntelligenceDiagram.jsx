@@ -98,10 +98,10 @@ const clients = [
 function ThemeLabel({ children }) {
   return (
     <div className="flex items-center gap-3 mb-4">
-      <span className="text-[10px] uppercase tracking-[0.25em] text-[#D97943] font-bold font-sans whitespace-nowrap">
+      <span className="text-[10px] uppercase tracking-[0.25em] text-[#ED4C14] font-bold font-sans whitespace-nowrap">
         {children}
       </span>
-      <div className="h-[1px] flex-1 bg-[#D97943]/30" />
+      <div className="h-[1px] flex-1 bg-[#ED4C14]/30" />
     </div>
   );
 }
@@ -117,8 +117,8 @@ function SectionCard({ children, className = "" }) {
 function Badge({ status }) {
   const styles = {
     Running: "bg-[#e3f6ea] text-[#2f9a63] border-[#2f9a63]/20",
-    Review: "bg-[#FFF5F0] text-[#D97943] border-[#D97943]/20",
-    Attention: "bg-[#FFF0E6] text-[#C8632B] border-[#C8632B]/20",
+    Review: "bg-[#FFF5F0] text-[#ED4C14] border-[#ED4C14]/20",
+    Attention: "bg-[#FFF0E6] text-[#D14311] border-[#D14311]/20",
   };
   return (
     <span className={`px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider border ${styles[status] || styles.Running}`}>
@@ -129,7 +129,7 @@ function Badge({ status }) {
 
 function StatusChip({ label }) {
   return (
-    <div className="px-3 py-1 rounded-full bg-[#1a2b4d]/5 border border-[#1a2b4d]/10 text-[10px] font-mono font-medium text-[#1a2b4d] uppercase tracking-wider">
+    <div className="px-3 py-1 rounded-full bg-[#15217C]/5 border border-[#15217C]/10 text-[10px] font-mono font-medium text-[#15217C] uppercase tracking-wider">
       {label}
     </div>
   );
@@ -141,7 +141,7 @@ function BrandFidelityCard({ client }) {
       <div className="flex justify-between items-center mb-4 border-b border-[#E8DDD1] pb-3">
         <div>
           <div className="text-[10px] uppercase tracking-widest text-[#6B7280] font-bold">Aggregate Brand Fidelity Score</div>
-          <div className="text-2xl font-display font-semibold text-[#1a2b4d] mt-1">{client.brandFidelity}</div>
+          <div className="text-2xl font-display font-semibold text-[#15217C] mt-1">{client.brandFidelity}</div>
           <div className="text-[9px] text-[#6B7280] mt-0.5 italic">Composite: visual DNA + likeness + composition</div>
         </div>
       </div>
@@ -156,11 +156,11 @@ function BrandFidelityCard({ client }) {
             <span className="text-[#6B7280]">{item.label}</span>
             <div className="flex items-center gap-1.5">
               {item.warn ? (
-                <div className="w-1.5 h-1.5 rounded-full bg-[#D97943]" />
+                <div className="w-1.5 h-1.5 rounded-full bg-[#ED4C14]" />
               ) : (
                 <Check className="w-3 h-3 text-[#2f9a63]" />
               )}
-              <span className={`font-medium ${item.warn ? "text-[#D97943]" : "text-[#1a2b4d]"}`}>{item.status}</span>
+              <span className={`font-medium ${item.warn ? "text-[#ED4C14]" : "text-[#15217C]"}`}>{item.status}</span>
             </div>
           </div>
         ))}
@@ -213,24 +213,24 @@ export default function BrandIntelligenceDiagram() {
   ];
 
   return (
-    <div className="min-h-screen w-full bg-[#F5F1EB] text-[#1a2b4d] font-sans selection:bg-[#D97943]/20 pb-20">
+    <div className="min-h-screen w-full bg-[#F5F1EB] text-[#15217C] font-sans selection:bg-[#ED4C14]/20 pb-20">
       <div className="mx-auto max-w-7xl px-6 py-10 space-y-12">
 
         <div className="text-center mb-2">
-          <span className="text-[12px] uppercase tracking-[0.4em] text-[#1a2b4d]/20 font-bold">Privileged and Confidential</span>
+          <span className="text-[12px] uppercase tracking-[0.4em] text-[#15217C]/20 font-bold">Privileged and Confidential</span>
         </div>
 
         {/* HEADER: OS Console Style */}
-        <header className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b border-[#D97943]/20 pb-6">
+        <header className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b border-[#ED4C14]/20 pb-6">
           <div className="space-y-2">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-[#1a2b4d] tracking-tight">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-[#15217C] tracking-tight">
               BrandStudios.AI Operating System
             </h1>
             <p className="text-base md:text-lg text-[#6B7280] font-sans font-medium">
-              Session view: <span className="text-[#1a2b4d]">Jenni Kayne</span> <span className="text-[#D97943]">+</span> <span className="text-[#1a2b4d]">CYLNDR</span> <span className="text-[#D97943]">+</span> <span className="text-[#1a2b4d]">Bazooka</span>
+              Session view: <span className="text-[#15217C]">Jenni Kayne</span> <span className="text-[#ED4C14]">+</span> <span className="text-[#15217C]">CYLNDR</span> <span className="text-[#ED4C14]">+</span> <span className="text-[#15217C]">Bazooka</span>
             </p>
             <div className="mt-2">
-              <span className="inline-block px-3 py-1 rounded-md bg-[#FFF5F0] border border-[#D97943]/30 text-[10px] font-bold uppercase tracking-wider text-[#D97943]">For Demonstration Purposes Only</span>
+              <span className="inline-block px-3 py-1 rounded-md bg-[#FFF5F0] border border-[#ED4C14]/30 text-[10px] font-bold uppercase tracking-wider text-[#ED4C14]">For Demonstration Purposes Only</span>
             </div>
           </div>
           <div className="flex flex-col items-end gap-3">
@@ -243,7 +243,7 @@ export default function BrandIntelligenceDiagram() {
             <div className="flex items-center gap-6">
               <div className="text-right">
                 <p className="text-[9px] uppercase tracking-[0.2em] text-[#6B7280]">Active Pilots</p>
-                <p className="text-xl font-display text-[#1a2b4d]">3</p>
+                <p className="text-xl font-display text-[#15217C]">3</p>
               </div>
             </div>
           </div>
@@ -262,12 +262,12 @@ export default function BrandIntelligenceDiagram() {
                     key={c.id}
                     onClick={() => setSelectedClientId(c.id)}
                     className={`w-full text-left p-4 rounded-xl border transition-all duration-200 group ${selectedClientId === c.id
-                      ? "bg-white border-[#D97943] shadow-lg ring-1 ring-[#D97943]/10"
-                      : "bg-white/40 border-[#E8DDD1] hover:bg-white/80 hover:border-[#D97943]/50"
+                      ? "bg-white border-[#ED4C14] shadow-lg ring-1 ring-[#ED4C14]/10"
+                      : "bg-white/40 border-[#E8DDD1] hover:bg-white/80 hover:border-[#ED4C14]/50"
                       }`}
                   >
                     <div className="flex items-center justify-between mb-2">
-                      <span className={`font-display font-semibold text-xl ${selectedClientId === c.id ? "text-[#1a2b4d]" : "text-[#6B7280]"}`}>
+                      <span className={`font-display font-semibold text-xl ${selectedClientId === c.id ? "text-[#15217C]" : "text-[#6B7280]"}`}>
                         {c.name}
                       </span>
                       <Badge status={c.status} />
@@ -313,11 +313,11 @@ export default function BrandIntelligenceDiagram() {
                       )}
 
                       <div className="flex items-center justify-between mb-3">
-                        <div className="text-[#D97943] group-hover:scale-110 transition-transform duration-300">
+                        <div className="text-[#ED4C14] group-hover:scale-110 transition-transform duration-300">
                           <sol.icon className="w-6 h-6" />
                         </div>
                       </div>
-                      <h4 className="font-display font-semibold text-base text-[#1a2b4d] mb-1">{sol.title}</h4>
+                      <h4 className="font-display font-semibold text-base text-[#15217C] mb-1">{sol.title}</h4>
                       <p className="text-[11px] text-[#6B7280] leading-snug">{sol.desc}</p>
                     </div>
                   ))}
@@ -349,7 +349,7 @@ export default function BrandIntelligenceDiagram() {
                       href={client.askLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-sm text-[#D97943] hover:text-[#b96232] font-medium mt-2"
+                      className="inline-flex items-center gap-2 text-sm text-[#ED4C14] hover:text-[#C84010] font-medium mt-2"
                     >
                       Learn more <ArrowUpRight className="w-4 h-4" />
                     </a>
@@ -357,12 +357,12 @@ export default function BrandIntelligenceDiagram() {
                 </div>
                 <div className="flex flex-col items-center justify-center p-6 bg-[#F5F1EB]/50 rounded-xl border border-[#E8DDD1] text-center space-y-3">
                   <div className="text-[10px] uppercase tracking-widest text-[#6B7280]">Live Environment</div>
-                  <h3 className="font-display text-2xl text-[#1a2b4d]">{client.name} Dashboard</h3>
+                  <h3 className="font-display text-2xl text-[#15217C]">{client.name} Dashboard</h3>
                   <a
                     href={client.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 bg-[#D97943] text-white px-6 py-2.5 rounded-lg font-medium text-sm hover:bg-[#b96232] transition-colors shadow-md hover:shadow-lg"
+                    className="flex items-center gap-2 bg-[#ED4C14] text-white px-6 py-2.5 rounded-lg font-medium text-sm hover:bg-[#C84010] transition-colors shadow-md hover:shadow-lg"
                   >
                     View Dashboard <ArrowUpRight className="w-4 h-4" />
                   </a>
@@ -375,13 +375,13 @@ export default function BrandIntelligenceDiagram() {
         {/* SECTION 2: OS Core Services */}
         <div>
           <div className="flex items-center gap-4 mb-4">
-            <span className="text-[10px] uppercase tracking-[0.25em] text-[#D97943] font-bold font-sans whitespace-nowrap">
+            <span className="text-[10px] uppercase tracking-[0.25em] text-[#ED4C14] font-bold font-sans whitespace-nowrap">
               OS CORE SERVICES (ALWAYS ON)
             </span>
-            <div className="h-[1px] flex-1 bg-[#D97943]/30" />
-            <div className="hidden sm:flex items-center gap-2 px-3 py-1 bg-[#FFF5F0] border border-[#D97943]/20 rounded-full">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#D97943]" />
-              <span className="text-[10px] font-bold text-[#D97943] uppercase tracking-wide">Ship-Gate (Quality Gate): auto-pass ≥ 90%; else HITL</span>
+            <div className="h-[1px] flex-1 bg-[#ED4C14]/30" />
+            <div className="hidden sm:flex items-center gap-2 px-3 py-1 bg-[#FFF5F0] border border-[#ED4C14]/20 rounded-full">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#ED4C14]" />
+              <span className="text-[10px] font-bold text-[#ED4C14] uppercase tracking-wide">Ship-Gate (Quality Gate): auto-pass ≥ 90%; else HITL</span>
             </div>
           </div>
 
@@ -392,20 +392,20 @@ export default function BrandIntelligenceDiagram() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
               {lanes.map((lane, i) => (
                 <div key={lane.title} className="relative z-10 h-full">
-                  <div className="h-full bg-white rounded-xl border border-[#E8DDD1] p-5 hover:border-[#D97943] hover:shadow-lg transition-all group flex flex-col shadow-[0_4px_20px_rgba(0,0,0,0.02)]">
+                  <div className="h-full bg-white rounded-xl border border-[#E8DDD1] p-5 hover:border-[#ED4C14] hover:shadow-lg transition-all group flex flex-col shadow-[0_4px_20px_rgba(0,0,0,0.02)]">
 
                     {/* Bus Connector (Vertical) */}
-                    <div className="hidden lg:block absolute -top-[24px] left-1/2 -translate-x-1/2 w-[2px] h-[24px] bg-[#E8DDD1] group-hover:bg-[#D97943] transition-colors" />
-                    <div className="hidden lg:block absolute -top-[4px] left-1/2 -translate-x-1/2 w-[6px] h-[6px] rounded-full border border-[#E8DDD1] bg-white group-hover:border-[#D97943] transition-colors" />
+                    <div className="hidden lg:block absolute -top-[24px] left-1/2 -translate-x-1/2 w-[2px] h-[24px] bg-[#E8DDD1] group-hover:bg-[#ED4C14] transition-colors" />
+                    <div className="hidden lg:block absolute -top-[4px] left-1/2 -translate-x-1/2 w-[6px] h-[6px] rounded-full border border-[#E8DDD1] bg-white group-hover:border-[#ED4C14] transition-colors" />
 
                     {/* Step Number */}
-                    <div className="w-6 h-6 rounded-full bg-[#1a2b4d] text-[#F5F1EB] flex items-center justify-center font-mono text-[10px] font-bold shadow-md mb-3 group-hover:bg-[#D97943] transition-colors">
+                    <div className="w-6 h-6 rounded-full bg-[#15217C] text-[#F5F1EB] flex items-center justify-center font-mono text-[10px] font-bold shadow-md mb-3 group-hover:bg-[#ED4C14] transition-colors">
                       {lane.step}
                     </div>
 
                     <div className="flex items-center gap-2 mb-2">
-                      <lane.icon className="w-5 h-5 text-[#D97943]" />
-                      <h4 className="text-sm font-bold uppercase tracking-tight text-[#1a2b4d] leading-tight">{lane.title}</h4>
+                      <lane.icon className="w-5 h-5 text-[#ED4C14]" />
+                      <h4 className="text-sm font-bold uppercase tracking-tight text-[#15217C] leading-tight">{lane.title}</h4>
                     </div>
 
                     <p className="text-xs text-[#6B7280] leading-relaxed mb-3">
