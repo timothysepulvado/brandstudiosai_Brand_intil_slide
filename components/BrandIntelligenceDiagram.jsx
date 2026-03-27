@@ -68,6 +68,26 @@ const clients = [
       { title: "Creative Studio", icon: Wand2, desc: "Production and refinement of creative outputs." },
       { title: "Compliance Check", icon: Lock, desc: "Final legal and brand governance review." }
     ]
+  },
+  {
+    id: "bazooka",
+    name: "Bazooka",
+    status: "Running",
+    description: "Volume without compromise.",
+    url: "https://bazooka-pied.vercel.app/",
+    brandFidelity: "94.7%",
+    asks: [
+      "Photorealistic Push Pop character renders across e-commerce carousel and A+ banner formats.",
+      "Five seasonal campaign themes with vibrant, eye-catching styles for nostalgic adults and new generations.",
+      "Pre-dawn asset delivery—content syndication-ready before morning review."
+    ],
+    askLink: "#",
+    solutions: [
+      { title: "Content Engine", icon: Zap, desc: "High-volume asset generation for e-commerce." },
+      { title: "Format Factory", icon: LayoutTemplate, desc: "Auto-adapt to platform specs and ratios." },
+      { title: "Brand Guard", icon: ShieldCheck, desc: "Heritage color and character consistency." },
+      { title: "Syndication Hub", icon: Globe, desc: "Scheduled multi-platform content delivery." }
+    ]
   }
 ];
 
@@ -207,7 +227,7 @@ export default function BrandIntelligenceDiagram() {
               BrandStudios.AI Operating System
             </h1>
             <p className="text-base md:text-lg text-[#6B7280] font-sans font-medium">
-              Session view: <span className="text-[#1a2b4d]">Jenni Kayne</span> <span className="text-[#D97943]">+</span> <span className="text-[#1a2b4d]">CYLNDR</span>
+              Session view: <span className="text-[#1a2b4d]">Jenni Kayne</span> <span className="text-[#D97943]">+</span> <span className="text-[#1a2b4d]">CYLNDR</span> <span className="text-[#D97943]">+</span> <span className="text-[#1a2b4d]">Bazooka</span>
             </p>
             <div className="mt-2">
               <span className="inline-block px-3 py-1 rounded-md bg-[#FFF5F0] border border-[#D97943]/30 text-[10px] font-bold uppercase tracking-wider text-[#D97943]">For Demonstration Purposes Only</span>
@@ -223,7 +243,7 @@ export default function BrandIntelligenceDiagram() {
             <div className="flex items-center gap-6">
               <div className="text-right">
                 <p className="text-[9px] uppercase tracking-[0.2em] text-[#6B7280]">Active Pilots</p>
-                <p className="text-xl font-display text-[#1a2b4d]">2</p>
+                <p className="text-xl font-display text-[#1a2b4d]">3</p>
               </div>
             </div>
           </div>
