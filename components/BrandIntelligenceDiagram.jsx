@@ -37,7 +37,7 @@ const clients = [
     asks: [
       "Prove AI can deliver model and clothing realness at brand quality.",
       "Maintain consistent model likeness across all generated assets.",
-      "Extend photo shoots without reshoots and create video from stills—preserving tone."
+      "Extend photo shoots without reshoots and create video from stills, preserving tone."
     ],
     askLink: "#", // Placeholder link
     // "Client Pack" Modules
@@ -79,7 +79,7 @@ const clients = [
     asks: [
       "Photorealistic Push Pop character renders across e-commerce carousel and A+ banner formats.",
       "Five seasonal campaign themes with vibrant, eye-catching styles for nostalgic adults and new generations.",
-      "Pre-dawn asset delivery—content syndication-ready before morning review."
+      "Pre-dawn asset delivery, content syndication-ready before morning review."
     ],
     askLink: "#",
     solutions: [
@@ -87,6 +87,26 @@ const clients = [
       { title: "Format Factory", icon: LayoutTemplate, desc: "Auto-adapt to platform specs and ratios." },
       { title: "Brand Guard", icon: ShieldCheck, desc: "Heritage color and character consistency." },
       { title: "Syndication Hub", icon: Globe, desc: "Scheduled multi-platform content delivery." }
+    ]
+  },
+  {
+    id: "lilydale",
+    name: "Lilydale",
+    status: "Running",
+    description: "Wholesome without slowdown.",
+    url: "https://lillydale-crcwfht98-timothys-projects-13acbfe3.vercel.app/",
+    brandFidelity: "95.8%",
+    asks: [
+      "Uphold strict heritage brand and campaign guidelines across every asset.",
+      "Adapt every variant across every social platform spec and ratio.",
+      "Multiply source video and stills into a full on-brand library."
+    ],
+    askLink: "#",
+    solutions: [
+      { title: "Source Multiplication", icon: Zap, desc: "Turn one asset into many new content pieces and platform variants, on-brand." },
+      { title: "Variant Engine", icon: Wand2, desc: "Per-sandwich variants from source video and stills." },
+      { title: "Brand Guard", icon: ShieldCheck, desc: "Heritage tone and warmth preserved across every output." },
+      { title: "Format Syndication", icon: Globe, desc: "Social, retail, and DTC delivery in native specs." }
     ]
   }
 ];
@@ -227,7 +247,7 @@ export default function BrandIntelligenceDiagram() {
               BrandStudios.AI Operating System
             </h1>
             <p className="text-base md:text-lg text-[#6B7280] font-sans font-medium">
-              Session view: <span className="text-[#15217C]">Jenni Kayne</span> <span className="text-[#ED4C14]">+</span> <span className="text-[#15217C]">CYLNDR</span> <span className="text-[#ED4C14]">+</span> <span className="text-[#15217C]">Bazooka</span>
+              Session view: <span className="text-[#15217C]">Jenni Kayne</span> <span className="text-[#ED4C14]">+</span> <span className="text-[#15217C]">CYLNDR</span> <span className="text-[#ED4C14]">+</span> <span className="text-[#15217C]">Bazooka</span> <span className="text-[#ED4C14]">+</span> <span className="text-[#15217C]">Lilydale</span>
             </p>
             <div className="mt-2">
               <span className="inline-block px-3 py-1 rounded-md bg-[#FFF5F0] border border-[#ED4C14]/30 text-[10px] font-bold uppercase tracking-wider text-[#ED4C14]">For Demonstration Purposes Only</span>
@@ -243,7 +263,7 @@ export default function BrandIntelligenceDiagram() {
             <div className="flex items-center gap-6">
               <div className="text-right">
                 <p className="text-[9px] uppercase tracking-[0.2em] text-[#6B7280]">Active Pilots</p>
-                <p className="text-xl font-display text-[#15217C]">3</p>
+                <p className="text-xl font-display text-[#15217C]">4</p>
               </div>
             </div>
           </div>
