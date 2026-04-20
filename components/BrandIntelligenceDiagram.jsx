@@ -54,6 +54,8 @@ const clients = [
     status: "Running",
     description: "Coherence under compression.",
     url: "https://cyndr-dysply.vercel.app",
+    secondaryUrl: "https://russellbarnett.github.io/CYLNDRCONCEPTS/",
+    secondaryLabel: "View Concepts",
     brandFidelity: "96.9%",
     asks: [
       "60 AI-generated images for rapid merch drop deployment.",
@@ -243,8 +245,15 @@ export default function BrandIntelligenceDiagram() {
         {/* HEADER: OS Console Style */}
         <header className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b border-[#ED4C14]/20 pb-6">
           <div className="space-y-2">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-[#15217C] tracking-tight">
-              BrandStudios.AI Operating System
+            <h1 className="flex flex-wrap items-center gap-x-4 gap-y-2 tracking-tight">
+              <img
+                src="/brandstudios-logo.png"
+                alt="BrandStudios.AI"
+                className="h-8 md:h-10 lg:h-12 w-auto"
+              />
+              <span className="text-2xl md:text-3xl lg:text-4xl font-display font-light text-[#15217C]">
+                Operating System
+              </span>
             </h1>
             <p className="text-base md:text-lg text-[#6B7280] font-sans font-medium">
               Session view: <span className="text-[#15217C]">Jenni Kayne</span> <span className="text-[#ED4C14]">+</span> <span className="text-[#15217C]">CYLNDR</span> <span className="text-[#ED4C14]">+</span> <span className="text-[#15217C]">Bazooka</span> <span className="text-[#ED4C14]">+</span> <span className="text-[#15217C]">Lilydale</span>
@@ -386,6 +395,16 @@ export default function BrandIntelligenceDiagram() {
                   >
                     View Dashboard <ArrowUpRight className="w-4 h-4" />
                   </a>
+                  {client.secondaryUrl && (
+                    <a
+                      href={client.secondaryUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-sm text-[#ED4C14] hover:text-[#C84010] font-medium"
+                    >
+                      {client.secondaryLabel || "Learn more"} <ArrowUpRight className="w-3.5 h-3.5" />
+                    </a>
+                  )}
                 </div>
               </SectionCard>
             </div>
