@@ -31,3 +31,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# graphify (code-graph output — stays in-repo, never committed; ADR 020)
+graphify-out/
+.graphify_analysis.json

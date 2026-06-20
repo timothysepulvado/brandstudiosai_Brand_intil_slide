@@ -1,0 +1,22 @@
+# build / framework output
+.next/
+out/
+dist/
+build/
+# assets / archived docs / memory
+public/
+Docs/Archive/
+.remember/
+.claude/
+# image / media globs
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.svg
+*.ico
+*.mp4
+*.mov
+*.pdf
+*.zip
